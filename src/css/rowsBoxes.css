@@ -1,0 +1,9 @@
+.rowsBoxes{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    row-gap: 35px;
+    column-gap: 37px;
+    margin-bottom: 50px;
+}

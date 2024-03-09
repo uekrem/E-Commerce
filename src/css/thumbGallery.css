@@ -1,0 +1,57 @@
+.myThumbGallery{
+    height: 60%;
+    width: 60%;
+    display: flex;
+}
+
+.mySwiper2{
+    border: 1px solid rgb(233, 233, 233);
+    border-radius: 10px;
+    box-shadow: 0 2px 7px #dfdfdf;
+}
+
+.mySwiper2 img{
+    width: 448px;
+    height: 448px;
+    object-fit: contain;
+    object-position: center;
+    transform: scale(0.9);
+}
+
+.mySwiper img{
+    width: 50%;
+    height: 50%;
+}
+
+.mySwiper .swiper-slide{
+    opacity: 0.4;
+}
+
+.mySwiper .swiper-slide-thumb-active{
+    opacity: 1;
+}
+
+.productLeft{
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+}
+
+.productRight{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 20px;
+}
+
+.productRight h1{
+    color:#484848;
+}
+
+.productRight div:nth-of-type(3){
+    display: flex;
+    column-gap: 10px;
+    border-top: 1px solid rgb(233, 233, 233);
+    padding-top: 60px;
+    margin-top: 20px;
+}

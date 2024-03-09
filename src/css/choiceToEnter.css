@@ -1,0 +1,92 @@
+#choiceButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 30px;
+    width: 30%;
+    margin-top: 20px;
+}
+
+#choiceButton button{
+    width:45%;
+    color:white;
+    background-color:rgb(242, 121, 25);
+}
+
+#choiceButton button:hover{
+    background-color:rgb(255, 139, 56);
+}
+
+#email, #password, #name{
+    height: 7px;
+    background-color: rgb(250, 250, 250);
+    font-size: 12px;
+    width: 250px;
+}
+
+#email, #name{
+    width: 280px;
+}
+
+#signIn{
+    width:30%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    background-color:rgb(255, 255, 255);
+    border:1px solid rgb(230, 230, 230);
+    border-radius:10px;
+    padding: 40px 10px;
+    margin-top: 10px;
+    row-gap: 30px;
+}
+
+#registerIn{
+    width:30%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    background-color:rgb(255, 255, 255);
+    border:1px solid rgb(230, 230, 230);
+    border-radius:10px;
+    padding: 40px 10px;
+    margin-top: 10px;
+    row-gap: 3px;
+}
+
+#signIn div, #registerIn div{
+    margin: 3px 0;
+}
+
+#dateBlock{
+    width: 310px;
+}
+
+#sayHello{
+    width:30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 10px;
+}
+
+#sayHello h3{
+    font-weight:bolder;
+    color: rgb(51, 51, 51);
+}
+
+#sayHello p{
+    font-weight:lighter;
+    color: rgb(51, 51, 51);
+    font-size: 11px;
+}
+
+#genderRadio{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 20px;
+}

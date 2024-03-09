@@ -1,0 +1,73 @@
+#leftProfile{
+    width: 50%;
+    min-height: calc(100vh / 1.5);
+    border:1px solid rgb(226, 226, 226);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#rightProfile{
+    width: 50%;
+    min-height: calc(100vh / 1.5);
+    border:1px solid rgb(226, 226, 226);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#leftProfile > div, #rightProfile > div{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+    row-gap: 7px;
+}
+
+#nameBlock, #surBlock{
+    display: flex;
+    flex-direction: column;
+    row-gap: 7px;
+}
+
+#nameBlock{
+    margin-bottom: 18px;
+}
+
+#profile{
+    width:75%;  
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    margin-top:30px;
+    flex-direction:row;
+}
+
+#leftButton, #rightButton{
+    width: 60%;
+    background-color:rgb(242, 121, 25);
+    color: white;
+    margin-top: 25px;
+}
+
+#rightButton{
+    width: 314px;
+}
+
+#leftButton:hover{
+    background-color:rgb(255, 139, 56);
+}
+
+#rightButton:hover{
+    background-color:rgb(255, 139, 56);
+}
+
+#profile label{
+    font-size: 13px;
+}
