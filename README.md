@@ -1,4 +1,4 @@
-| E-Commerce                | Durumu |
+| E-Commerce(TrendyolClone)  | Durumu |
 | -------------------------- | ------- |
 | Kategori ve Ürün İçeriği Yönetimi |✅|
 | Ürün özellikleri tanımı ve kısa bilgi tanımı |✅|
