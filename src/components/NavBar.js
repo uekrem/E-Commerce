@@ -1,19 +1,22 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PersonIcon from '@mui/icons-material/Person';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import SearchBar from '@mkyy/mui-search-bar';
-import { Context } from '../context/Context.js';
+import { useSelector, useDispatch } from 'react-redux';
+import { setInform } from '../stores/productHierarchy';
 
 export function NavBar() {
 
-    const {inform, setInform, navigate} = useContext(Context);
-
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const {inform, complate} = useSelector((state) => state.productHierarchy);
+    
     async function fetchData() {
         const response = await fetch('https://fakestoreapi.com/products');
         const fetchedData = await response.json();
-        setInform(fetchedData);
+        dispatch(setInform(fetchedData));
     };
     
     useEffect(() => {

@@ -1,19 +1,18 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Context } from '../context/Context';
+import { useSelector, useDispatch } from 'react-redux';
+import {setRepeat} from "../stores/productHierarchy"
 
 export function BasketCard(props) {
 
-  const { complate } = useContext(Context)
-  let { data, rep, setRep } = props;
-  let basketObj = JSON.parse(localStorage.getItem("http://localhost:3000/Basket")) || complate;
+  const dispatch = useDispatch();
+  let { data, basketObj, repeat } = props;
 
   function deleteCard(){
-    console.log(basketObj[data.id])
     delete basketObj[data.id];
     localStorage.setItem("http://localhost:3000/Basket", JSON.stringify(basketObj));
-    setRep(!rep);
+    dispatch(setRepeat(!repeat));
   }
   
   return (

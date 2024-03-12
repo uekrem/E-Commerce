@@ -1,10 +1,12 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { WideCard } from './WideCard'
+import { useSelector } from 'react-redux';
+import { EmptyPage } from './EmptyPage';
 
 export function MyFavorites() {
-
-  const [repeat, setRepeat] = useState(0);
   
+  const { repeat } = useSelector((state) => state.productHierarchy)
+
   if(!(JSON.parse(localStorage.getItem("http://localhost:3000/MyFavorites"))))
     return;
   
@@ -21,12 +23,12 @@ export function MyFavorites() {
         paddingBottom:"100px",
         }}>
   
-          <content style={{
+          <main style={{
             width:"75%",  
             height:"100%",
             display:'flex',
             alignItems:"center",
-            justifyContent:"start",
+            justifyContent:"center",
             marginTop:"30px",
             flexWrap:"wrap",
             columnGap:"40px",
@@ -34,12 +36,14 @@ export function MyFavorites() {
             }}>
               
             {
+              !Object.keys(selectProduct).length 
+              ? <EmptyPage parag={"favorites"} /> :
               keys.map((key, index) => (
-                <WideCard key={index} data={selectProduct[key]} rep={repeat} setRep={setRepeat} />
+                <WideCard key={index} data={selectProduct[key]} repeat={repeat} />
               ))
             }
   
-        </content>
+        </main>
   
       </div>
   )

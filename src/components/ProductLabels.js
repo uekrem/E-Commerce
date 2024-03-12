@@ -1,14 +1,14 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Button from '@mui/material-next/Button';
 import IconButton from '@mui/material/IconButton';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Rating from '@mui/material/Rating';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { Context } from "../context/Context.js"
+import { useSelector } from 'react-redux';
 
 export function ProductLabels(props) {
 
-  const {complate} = useContext(Context);
+  const { complate } = useSelector((state) => state.productHierarchy)
   const complateObj = JSON.parse(localStorage.getItem("http://localhost:3000/MyFavorites")) || complate;
   let basketObj = JSON.parse(localStorage.getItem("http://localhost:3000/Basket")) || complate;
   const [favIcon, setfavIcon] = useState(1);

@@ -38,7 +38,7 @@ export function ChoiceToEnter() {
         backgroundColor:"rgb(250, 250, 250)",
         }}>
   
-          <content style={{
+          <main style={{
             width:"75%",  
             height:"100%",
             display:'flex',
@@ -58,7 +58,7 @@ export function ChoiceToEnter() {
 
             </div>
   
-          </content>
+          </main>
   
       </div>
   )

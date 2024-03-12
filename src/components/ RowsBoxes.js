@@ -7,9 +7,9 @@ import { rowBoxData } from '../data/campaignData';
 export function  RowsBoxes() {
   return (
     <div className="rowsBoxes"> 
-        {rowBoxData.map(element => {
+        {rowBoxData.map((element, index) => {
             return (
-                <Card sx={{ maxWidth: "31%"}}>
+                <Card key={index} sx={{ maxWidth: "31%"}}>
                     <CardActionArea>
                         <CardMedia
                         component="img"

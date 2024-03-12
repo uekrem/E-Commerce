@@ -1,12 +1,13 @@
-import React, { useContext, useState } from 'react'
+import React from 'react'
 import { WideCardSearch } from './WideCardSearch';
-import { Context } from '../context/Context.js';
+import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export function SearchResults() {
   
-  const { location } = useContext(Context);
+  const location = useLocation();
   const data = location.state.filterSearch;
-  const [repeat, setRepeat] = useState(0);
+  const { repeat } = useSelector((state) => state.productHierarchy)
 
   return (
     <div style={{
@@ -18,7 +19,7 @@ export function SearchResults() {
       paddingBottom:"100px",
       }}>
 
-        <content style={{
+        <main style={{
           width:"75%",  
           height:"100%",
           display:'flex',
@@ -30,10 +31,10 @@ export function SearchResults() {
           columnGap:"40px",
           rowGap:"40px",
           }}>
-            {data.map(function(element){
-              return (<WideCardSearch  rep={repeat} setRep={setRepeat} data={element}/>)
+            {data.map(function(element, index){
+              return (<WideCardSearch  key={index} data={element} repeat={repeat}/>)
             })}
-        </content>
+        </main>
 
     </div>
   )

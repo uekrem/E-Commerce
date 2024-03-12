@@ -1,14 +1,16 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import Rating from '@mui/material/Rating';
 import Button from '@mui/material-next/Button';
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { Context } from '../context/Context.js';
+import { useSelector, useDispatch } from 'react-redux';
+import { setRepeat } from '../stores/productHierarchy';
 
 export function WideCard(props) {
 
-    const { complate } = useContext(Context)
-    let {data, rep, setRep} = props;
+    const { complate } = useSelector((state) => state.productHierarchy)
+    const dispatch = useDispatch();
+    let {data, repeat} = props;
     data = JSON.parse(data);
     let complateObj = JSON.parse(localStorage.getItem("http://localhost:3000/MyFavorites")) || complate;
     let basketObj = JSON.parse(localStorage.getItem("http://localhost:3000/Basket")) || complate;
@@ -16,7 +18,7 @@ export function WideCard(props) {
     function favDelete(){
         delete complateObj[data.id];
         localStorage.setItem("http://localhost:3000/MyFavorites", JSON.stringify(complateObj));
-        setRep(!rep);
+        dispatch(setRepeat(!repeat));
     }
 
     function handleBasket(){

@@ -1,14 +1,18 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import Rating from '@mui/material/Rating';
 import IconButton from '@mui/material/IconButton';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { Context } from '../context/Context.js';
+import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import {setRepeat} from "../stores/productHierarchy"
 
 export function WideCardSearch(props) {
 
-    const {navigate, complate} = useContext(Context)
-    const {data, rep, setRep} = props;
+    const { complate } = useSelector((state) => state.productHierarchy)
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const {data, repeat} = props;
     let complateObj = JSON.parse(localStorage.getItem("http://localhost:3000/MyFavorites")) || complate;
 
     const handleClick = (selectProduct) => {
@@ -29,7 +33,7 @@ export function WideCardSearch(props) {
         else
             complateObj[JSON.parse(data.id)] = JSON.stringify(data);
         localStorage.setItem("http://localhost:3000/MyFavorites", JSON.stringify(complateObj));
-        setRep(!rep);
+        dispatch(setRepeat(!repeat));
     }
 
   return (

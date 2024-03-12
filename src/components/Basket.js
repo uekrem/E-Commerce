@@ -1,14 +1,14 @@
-import React, {useContext, useState} from 'react';
-import { Context } from '../context/Context';
+import React from 'react';
 import { BasketCard } from './BasketCard';
 // import { MyMultiCarousel } from './MyMultiCarousel';
 import { Button } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { EmptyPage } from './EmptyPage';
 
 export function Basket() {
 
   let result = 0;
-  const { complate } = useContext(Context)
-  const [repeat, setRepeat] = useState(0);
+  const { complate, repeat } = useSelector((state) => state.productHierarchy);
   let basketObj = JSON.parse(localStorage.getItem("http://localhost:3000/Basket")) || complate;
   const keys = Object.keys(basketObj);
 
@@ -27,7 +27,7 @@ export function Basket() {
       paddingBottom:"100px"
       }}>
 
-        <content style={{
+        <main style={{
           width:"75%",  
           height:"100%",
           display:'flex',
@@ -35,38 +35,40 @@ export function Basket() {
           marginTop:"30px",
           flexDirection:"column",
           }}>
-          <div id='basket'>
-
-            <div id="basketList">
-              {
-                keys.map((key, index) => (
-                  <BasketCard key={index} data={basketObj[key]} rep={repeat} setRep={setRepeat} />
-                ))
-              }
-            </div>
-
-            <div id="invoice">
-              <div>
-                <h3>SELECT PRODUCT(?)</h3>
-                <h2>
-                  {result + 3}$
-                </h2>
+          { !Object.keys(basketObj).length ? <EmptyPage parag={"cart"} /> :
+            <>
+              <div id='basket'>
+                <div id="basketList">
+                  {
+                    keys.map((key, index) => (
+                      <BasketCard key={index} data={basketObj[key]} repeat={repeat} basketObj={basketObj}/>
+                    ))
+                  }
+                </div>
+    
+                <div id="invoice">
+                  <div>
+                    <h3>SELECT PRODUCT ({Object.keys(basketObj).length})</h3>
+                    <h2>
+                      {Number(result.toFixed(2)) + 3}$
+                    </h2>
+                  </div>
+                  <Button size="large" variant="filled">Complete Shopping</Button>
+                  <div>
+                    <h5>Product: {Number(result.toFixed(2))}$ </h5>
+                    <h5>Cargo: 3$ </h5>
+                  </div>
+                  <div>
+                    <h4>Your Earnings 🥳</h4><small>0$</small>
+                  </div>
+                </div>
               </div>
-              <Button size="large" variant="filled">Complete Shopping</Button>
-              <div>
-                <h5>Product: {result}$ </h5>
-                <h5>Cargo: 3$ </h5>
-              </div>
-              <div>
-                <h4>Your Earnings 🥳</h4><small>0$</small>
-              </div>
-            </div>
+              {/* <MyMultiCarousel title="You may like" /> */}
+            </>
 
-          </div>
+          }
 
-          {/* <MyMultiCarousel title="You may like" /> */}
-
-        </content>
+        </main>
 
     </div>
   )

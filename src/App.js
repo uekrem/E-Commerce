@@ -10,8 +10,8 @@ import { MyFavorites } from './components/MyFavorites.js';
 import { SearchResults } from './components/SearchResults.js';
 import { ChoiceToEnter } from './components/ChoiceToEnter.js';
 import { Profile } from './components/Profile.js';
-import { Provider } from './context/Context.js';
 import './css/footer.css';
+import "./css/emptyPage.css"
 import './css/navBar.css';
 import "./css/orderCard.css"
 import "./css/wideCard.css"
@@ -28,10 +28,12 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import 'swiper/css';
+import { store } from './store'
+import { Provider } from 'react-redux'
 
 export default function App() {
   return (
-    <Provider>
+    <Provider store={store}>
       <Routes>
           <Route path="/" element={ <><NavBar /><Home /><Footer /></>} />
           <Route path="/ProductDetail" element={ <><NavBar /><ProductDetail /><Footer /></> } />

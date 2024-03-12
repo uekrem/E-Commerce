@@ -1,12 +1,12 @@
 import { MyCarousel } from './Carousel';
-import React, {useContext} from 'react';
-import { Context } from '../context/Context';
+import React from 'react';
 import { MyMultiCarousel } from "./MyMultiCarousel.js"
 import { RowsBoxes } from "./ RowsBoxes.js"
+import { useSelector } from 'react-redux';
 
 export function Home() {
 
-  const {inform} = useContext(Context);
+  const { inform } = useSelector((state) => state.productHierarchy)
   
   if (inform === undefined)
     return;
@@ -21,7 +21,7 @@ export function Home() {
       paddingBottom:"100px",
       }}>
 
-        <content style={{
+        <main style={{
           width:"75%",  
           height:"100%",
           display:'flex',
@@ -43,7 +43,7 @@ export function Home() {
 
           <MyMultiCarousel data={inform} categ="women's clothing" title="Mixed selected products" />
 
-        </content>
+        </main>
 
     </div>
   )

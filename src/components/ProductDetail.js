@@ -19,7 +19,7 @@ export function ProductDetail() {
       paddingBottom:"100px",
       }}>
 
-        <content style={{
+        <main style={{
           width:"75%",  
           height:"100%",
           display:'flex',
@@ -34,7 +34,7 @@ export function ProductDetail() {
           
             <ProductInfo data={data} />
 
-        </content>
+        </main>
 
     </div>
   )

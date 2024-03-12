@@ -51,7 +51,7 @@ export function Profile() {
         paddingBottom:"100px",
         }}>
   
-        <content id="profile">
+        <main id="profile">
 
             <div id="leftProfile">
                 
@@ -204,7 +204,7 @@ export function Profile() {
                     <Button id="rightButton" size="large" variant="filled">UPDATE</Button>
                 </div>
             </div>
-        </content>
+        </main>
     </div>
   )
 }

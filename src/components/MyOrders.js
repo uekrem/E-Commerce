@@ -12,7 +12,7 @@ export function MyOrders() {
       paddingBottom:"100px",
       }}>
 
-        <content style={{
+        <main style={{
           width:"75%",  
           height:"100%",
           display:'flex',
@@ -28,7 +28,7 @@ export function MyOrders() {
 
           <OrderCard />
 
-        </content>
+        </main>
 
     </div>
   )
