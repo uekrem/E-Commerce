@@ -8,7 +8,8 @@ import { Checkout } from './components/Checkout.js';
 import { MyOrders } from './components/MyOrders.js';
 import { MyFavorites } from './components/MyFavorites.js';
 import { SearchResults } from './components/SearchResults.js';
-import { ChoiceToEnter } from './components/ChoiceToEnter.js';
+import { RegisterIn } from './components/RegisterIn.js';
+import { SignIn } from "./components/SignIn.js"
 import { Profile } from './components/Profile.js';
 import './css/footer.css';
 import "./css/emptyPage.css"
@@ -42,7 +43,8 @@ export default function App() {
           <Route path="/MyOrders" element={ <><NavBar /><MyOrders /><Footer /></> } />
           <Route path="/MyFavorites" element={ <><NavBar /><MyFavorites /><Footer /></> } />
           <Route path="/SearchResults" element={ <><NavBar /><SearchResults /><Footer /></> } />
-          <Route path="/ChoiceToEnter" element={ <><NavBar /><ChoiceToEnter /><Footer /></> } />
+          <Route path="/SignIn" element={ <><NavBar /><SignIn /><Footer /></> } />
+          <Route path="/RegisterIn" element={ <><NavBar /><RegisterIn /><Footer /></> } />
           <Route path="/Profile" element={ <><NavBar /><Profile /><Footer /></> } />
       </Routes>
     </Provider>

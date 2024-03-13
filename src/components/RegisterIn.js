@@ -5,12 +5,15 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useFormik } from 'formik';
 import * as Yup from "yup";
+import Button from '@mui/material/Button';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
-import { VisibilityOff, Visibility } from '@mui/icons-material';
+import { VisibilityOff, Visibility, ConstructionOutlined } from '@mui/icons-material';
 import { InputAdornment, IconButton } from '@mui/material';
+import {register} from "../firebase.js"
+import { Toaster } from 'react-hot-toast';
 
 const defaultTheme = createTheme();
 
@@ -22,6 +25,11 @@ export function RegisterIn() {
     setShowPassword(!showPassword);
   };
 
+  async function handleRegister(email, password){
+    const user = await register(email, password);
+    console.log(user);
+  }
+
   const formik = useFormik({
     initialValues: {
       name:"",
@@ -30,22 +38,22 @@ export function RegisterIn() {
     validationSchema:
       Yup.object({
         name: Yup
-          .string('Enter your name')
-          .required('Name is required'),
+          .string('')
+          .required(''),
         email: Yup
-          .string('Enter your email')
-          .email('Enter a valid email')
-          .required('Email is required'),
+          .string('')
+          .email('')
+          .required(''),
         password: Yup
-          .string('Enter your password')
-          .min(8, 'Password should be of minimum 8 characters length')
-          .required('Password is required'),
+          .string('')
+          .min(6, '')
+          .required(''),
       }),
   });
 
   return (
     <ThemeProvider theme={defaultTheme}>
-
+        <Toaster position='top-right' />
         <Box id="registerIn">
 
           <Typography component="h1" variant="h5">
@@ -62,7 +70,6 @@ export function RegisterIn() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               error={formik.touched.name && Boolean(formik.errors.name)}
-              helperText={formik.touched.name && formik.errors.name}
             />
           </div>
 
@@ -75,7 +82,6 @@ export function RegisterIn() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               error={formik.touched.email && Boolean(formik.errors.email)}
-              helperText={formik.touched.email && formik.errors.email}
             />
           </div>
 
@@ -97,7 +103,6 @@ export function RegisterIn() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               error={formik.touched.password && Boolean(formik.errors.password)}
-              helperText={formik.touched.password && formik.errors.password}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -114,8 +119,8 @@ export function RegisterIn() {
               }}
             />
           </div>
-
       </Box>
+          <Button size="large" variant="filled" onClick={() => handleRegister(formik.values.email, formik.values.password)}>Register In</Button>
     </ThemeProvider>
   );
 }

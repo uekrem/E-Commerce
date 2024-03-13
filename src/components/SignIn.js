@@ -6,6 +6,9 @@ import { useFormik } from 'formik';
 import * as Yup from "yup";
 import { VisibilityOff, Visibility } from '@mui/icons-material';
 import { InputAdornment, IconButton, Typography } from '@mui/material';
+import { login } from "../firebase.js"
+import Button from '@mui/material/Button';
+import { Toaster } from 'react-hot-toast';
 
 const defaultTheme = createTheme();
 
@@ -16,6 +19,11 @@ export function SignIn() {
   function handleClickShowPassword(){
     setShowPassword(!showPassword);
   };
+
+  async function handleSignIn(email, password){
+    const user = await login(email, password);
+    console.log(user);
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -37,7 +45,7 @@ export function SignIn() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-
+        <Toaster position='top-right' />
         <div id="sayHello">
           <h3>Hello,</h3>
           <p>Log in to Trendyol or create an account, don't miss the discounts!</p>
@@ -84,8 +92,11 @@ export function SignIn() {
               }}
             />
           </div>
-
         </Box>
+        <div id="choiceButton">
+            <Button size="large" variant="filled" onClick={() => handleSignIn(formik.values.email, formik.values.password)}>Sign In</Button>
+            <Button size="large" variant="filled">Register In</Button>
+          </div>
     </ThemeProvider>
   );
 }
