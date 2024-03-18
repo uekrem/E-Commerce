@@ -19,7 +19,7 @@ Proje, sürekli olarak güncellenmekte ve işlevsel hale getirilmektedir. Ödeme
 | Puan Kazandırma ve Kullandırma |🔄|
 | Ürün Yorum Puanlama        |✅|
 | XML entegrasyonu           |🔄|
-| Mail Entegrasyonu          |🔄|
+| Mail Entegrasyonu          |✅|
 | İstatistik Bölümü          |✅|
 | Kategori Bazlı Ürün Arama Ve Filtreleme |✅|
 | Marka Bazlı Ürün Filtreleme |🔄|
