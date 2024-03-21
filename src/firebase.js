@@ -8,12 +8,12 @@ import { setFavorite } from "./stores/favorite.js";
 import { setBasket } from "./stores/basket.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB0sXHnrlY4eXnW3X9dOUhkBHKjOiTo4H8",
-  authDomain: "myecommerce-1dd77.firebaseapp.com",
-  projectId: "myecommerce-1dd77",
-  storageBucket: "myecommerce-1dd77.appspot.com",
-  messagingSenderId: "111688240978",
-  appId: "1:111688240978:web:ed77d7dc3142a80393348b"
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: ""
 };
 
 const app = initializeApp(firebaseConfig);
