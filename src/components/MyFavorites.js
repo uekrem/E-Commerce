@@ -5,13 +5,7 @@ import { EmptyPage } from './EmptyPage';
 
 export function MyFavorites() {
   
-  const { repeat } = useSelector((state) => state.productHierarchy)
-
-  if(!(JSON.parse(localStorage.getItem("http://localhost:3000/MyFavorites"))))
-    return;
-  
-  const selectProduct = JSON.parse(localStorage.getItem("http://localhost:3000/MyFavorites"));
-  const keys = Object.keys(selectProduct);
+  const { list } = useSelector((state) => state.favorite)
 
   return (
     <div style={{
@@ -34,12 +28,11 @@ export function MyFavorites() {
             columnGap:"40px",
             rowGap:"40px",
             }}>
-              
             {
-              !Object.keys(selectProduct).length 
+              !(list.length > 0)
               ? <EmptyPage parag={"favorites"} /> :
-              keys.map((key, index) => (
-                <WideCard key={index} data={selectProduct[key]} repeat={repeat} />
+              list.map((key, index) => (
+                <WideCard key={index} box={key} />
               ))
             }
   

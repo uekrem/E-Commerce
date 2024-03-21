@@ -1,47 +1,66 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button } from '@mui/material';
-import { useFormik } from 'formik';
-import * as Yup from "yup";
 import TextField from '@mui/material/TextField';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { InputAdornment, IconButton, Typography } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { userLogin } from '../stores/auth';
+import { update, auth, resetPassword, verifyProfile } from '../firebase';
+import toast from 'react-hot-toast';
+import NewReleasesIcon from '@mui/icons-material/NewReleases';
+import MarkEmailReadIcon from '@mui/icons-material/MarkEmailRead';
 
 export function Profile() {
 
-    const [showPassword, setShowPassword] = React.useState(false)
+    const { user } = useSelector((state) => state.authR)
+    const [name, setName] = useState();
+    const [newEmail, setNewEmail] = useState();
+    const dispatch = useDispatch()
+    const [showPassword, setShowPassword] = useState({0:false,1:false,2:false})
+    const [replacePass , setReplacePass] = useState();
+    const [newPass, setNewPass] = useState();
+    const [replaceNewPass, setReplaceNewPass] = useState();
 
-    function handleClickShowPassword(){
-      setShowPassword(!showPassword);
-    };
+    useEffect(() => {
+        setName(user.displayName);
+        setNewEmail(user.email);
+    }, [user]);
+    
+    function handleClickShowPassword(index){
+        setShowPassword(prevState => ({
+            ...prevState,
+            [index]: !prevState[index]
+        }));
+    };      
 
-    const formik = useFormik({
-        initialValues: {
-          name:"",
-          department:"",
-        },
-        validationSchema:
-          Yup.object({
-            name: Yup
-              .string('Enter your name')
-              .required('Name is required'),
-            surname: Yup
-              .string('Enter your surname')
-              .required('Surname is required'),
-            email: Yup
-              .string('Enter your email')
-              .email('Enter a valid email')
-              .required('Email is required'),
-            password: Yup
-              .string('Enter your password')
-              .min(8, 'Password should be of minimum 8 characters length')
-              .required('Password is required'),
-          }),
-      });
+    async function handlePass(){
+        let check = false;
+
+        if (newPass === replaceNewPass){
+            check = await resetPassword(replacePass, newPass);
+            if(check){
+                setReplacePass('');
+                setNewPass('');
+                setReplaceNewPass('');
+            }
+        }
+        else
+            toast.error("Password does not match")
+    }
+
+    async function handleInform(){
+        await update({
+            displayName: name,
+            email: newEmail,
+        })
+        dispatch(userLogin({
+            displayName: auth.currentUser.displayName,
+            email: auth.currentUser.email,
+        }))
+    }
 
   return (
+    
     <div style={{
         width:"100%",  
         height:"100%",
@@ -54,11 +73,9 @@ export function Profile() {
         <main id="profile">
 
             <div id="leftProfile">
-                
             <Typography sx={{color:"rgb(243, 121, 25)",paddingBottom:"10px"}} component="h1" variant="h6">
                 My Membership Information
             </Typography>
-
                 <div id="nameSurBlock">
                     <div id="nameBlock">
                         <label>Name</label>
@@ -66,24 +83,8 @@ export function Profile() {
                         id="name"
                         name="name"
                         autoFocus
-                        value={formik.values.name}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        error={formik.touched.name && Boolean(formik.errors.name)}
-                        helperText={formik.touched.name && formik.errors.name}
-                        />
-                    </div>
-                    <div id="surBlock">
-                        <label>Surname</label>
-                        <TextField
-                        id="name"
-                        name="surname"
-                        autoFocus
-                        value={formik.values.surname}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        error={formik.touched.surname && Boolean(formik.errors.surname)}
-                        helperText={formik.touched.surname && formik.errors.surname}
+                        value={name || ""}
+                        onChange={(e) => setName(e.target.value)}
                         />
                     </div>
                 </div>
@@ -93,22 +94,14 @@ export function Profile() {
                     <TextField
                     id="email"
                     name="email"
-                    value={formik.values.email}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    error={formik.touched.email && Boolean(formik.errors.email)}
-                    helperText={formik.touched.email && formik.errors.email}
+                    disabled
+                    value={newEmail || ""}
+                    // onChange={(e) => setNewEmail(e.target.value)}
                     />
                 </div>
+                <Button startIcon={1 ? <NewReleasesIcon /> : <MarkEmailReadIcon />} onClick={verifyProfile}>{1 ?  "Verify Email" : "Approved"}</Button>
 
-                <div id="dateBlock">
-                    <label>Birthday</label>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DatePicker />
-                    </LocalizationProvider>
-                </div>
-
-                <Button id="leftButton" size="large" variant="filled">UPDATE</Button>
+                <Button onClick={handleInform} id="leftButton" size="large" variant="filled">UPDATE</Button>
 
             </div>
 
@@ -122,23 +115,20 @@ export function Profile() {
                     <label>Current password</label>
                     <TextField
                     name="password"
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword[0] ? 'text' : 'password'}
                     id="password"
-                    value={formik.values.password}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    error={formik.touched.password && Boolean(formik.errors.password)}
-                    helperText={formik.touched.password && formik.errors.password}
+                    value={replacePass}
+                    onChange={(e) => setReplacePass(e.target.value)}
                     InputProps={{
                         endAdornment: (
                         <InputAdornment position="end">
                             <IconButton
                             aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
+                            onClick={() => handleClickShowPassword(0)}
                             edge="end"
                             sx={{backgroundColor:"rgb(250, 250, 250)"}}
                             >
-                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                            {showPassword[0] ? <VisibilityOff /> : <Visibility />}
                             </IconButton>
                         </InputAdornment>
                         ),
@@ -150,23 +140,20 @@ export function Profile() {
                     <label>New password</label>
                     <TextField
                     name="password"
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword[1] ? 'text' : 'password'}
                     id="password"
-                    value={formik.values.password}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    error={formik.touched.password && Boolean(formik.errors.password)}
-                    helperText={formik.touched.password && formik.errors.password}
+                    value={newPass}
+                    onChange={(e) => setNewPass(e.target.value)}
                     InputProps={{
                         endAdornment: (
                         <InputAdornment position="end">
                             <IconButton
                             aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
+                            onClick={() => handleClickShowPassword(1)}
                             edge="end"
                             sx={{backgroundColor:"rgb(250, 250, 250)"}}
                             >
-                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                            {showPassword[1] ? <VisibilityOff /> : <Visibility />}
                             </IconButton>
                         </InputAdornment>
                         ),
@@ -178,30 +165,27 @@ export function Profile() {
                     <label>New password (Again)</label>
                     <TextField
                     name="password"
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword[2] ? 'text' : 'password'}
                     id="password"
-                    value={formik.values.password}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    error={formik.touched.password && Boolean(formik.errors.password)}
-                    helperText={formik.touched.password && formik.errors.password}
+                    value={replaceNewPass}
+                    onChange={(e) => setReplaceNewPass(e.target.value)}
                     InputProps={{
                         endAdornment: (
                         <InputAdornment position="end">
                             <IconButton
                             aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
+                            onClick={() => handleClickShowPassword(2)}
                             edge="end"
                             sx={{backgroundColor:"rgb(250, 250, 250)"}}
                             >
-                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                            {showPassword[2] ? <VisibilityOff /> : <Visibility />}
                             </IconButton>
                         </InputAdornment>
                         ),
                     }}
                     />
 
-                    <Button id="rightButton" size="large" variant="filled">UPDATE</Button>
+                    <Button onClick={handlePass} id="rightButton" size="large" variant="filled">UPDATE</Button>
                 </div>
             </div>
         </main>

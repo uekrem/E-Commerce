@@ -6,28 +6,26 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useFormik } from 'formik';
 import * as Yup from "yup";
 import Button from '@mui/material/Button';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormLabel from '@mui/material/FormLabel';
-import { VisibilityOff, Visibility, ConstructionOutlined } from '@mui/icons-material';
+import { VisibilityOff, Visibility } from '@mui/icons-material';
 import { InputAdornment, IconButton } from '@mui/material';
 import {register} from "../firebase.js"
-import { Toaster } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const defaultTheme = createTheme();
 
 export function RegisterIn() {
 
-  const [showPassword, setShowPassword] = React.useState(false)
+  const [showPassword, setShowPassword] = React.useState(false);
+  const navigate = useNavigate();
 
   function handleClickShowPassword(){
     setShowPassword(!showPassword);
   };
 
-  async function handleRegister(email, password){
-    const user = await register(email, password);
-    console.log(user);
+  async function handleRegister(email, password, name){
+    const user = await register(email, password, name);
+    if (user)
+      navigate("/", {replace:true})
   }
 
   const formik = useFormik({
@@ -53,7 +51,6 @@ export function RegisterIn() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-        <Toaster position='top-right' />
         <Box id="registerIn">
 
           <Typography component="h1" variant="h5">
@@ -85,14 +82,6 @@ export function RegisterIn() {
             />
           </div>
 
-          <div id="genderRadio">
-            <FormLabel sx={{color:"black"}} id="demo-row-radio-buttons-group-label">Gender</FormLabel>
-            <RadioGroup defaultValue="male" row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group">
-              <FormControlLabel value="male" control={<Radio />} label="Male" />
-              <FormControlLabel value="female" control={<Radio />} label="Female" />
-            </RadioGroup>
-          </div>
-
           <div>
             <label>Password</label>
             <TextField
@@ -120,7 +109,7 @@ export function RegisterIn() {
             />
           </div>
       </Box>
-          <Button size="large" variant="filled" onClick={() => handleRegister(formik.values.email, formik.values.password)}>Register In</Button>
+          <Button size="large" variant="filled" onClick={() => handleRegister(formik.values.email, formik.values.password, formik.values.name)}>Register In</Button>
     </ThemeProvider>
   );
 }

@@ -11,6 +11,9 @@ import { SearchResults } from './components/SearchResults.js';
 import { RegisterIn } from './components/RegisterIn.js';
 import { SignIn } from "./components/SignIn.js"
 import { Profile } from './components/Profile.js';
+import { AuthLoginPermission } from './components/AuthLoginPermission.js';
+import { AuthNotAccess } from './components/AuthNotAccess.js';
+import { AuthGhost } from './components/AuthGhost.js';
 import './css/footer.css';
 import "./css/emptyPage.css"
 import './css/navBar.css';
@@ -36,16 +39,17 @@ export default function App() {
   return (
     <Provider store={store}>
       <Routes>
-          <Route path="/" element={ <><NavBar /><Home /><Footer /></>} />
           <Route path="/ProductDetail" element={ <><NavBar /><ProductDetail /><Footer /></> } />
           <Route path="/Basket" element={ <><NavBar /><Basket /><Footer /></> } />
           <Route path="/Payment" element={ <Checkout /> } />
-          <Route path="/MyOrders" element={ <><NavBar /><MyOrders /><Footer /></> } />
           <Route path="/MyFavorites" element={ <><NavBar /><MyFavorites /><Footer /></> } />
           <Route path="/SearchResults" element={ <><NavBar /><SearchResults /><Footer /></> } />
-          <Route path="/SignIn" element={ <><NavBar /><SignIn /><Footer /></> } />
-          <Route path="/RegisterIn" element={ <><NavBar /><RegisterIn /><Footer /></> } />
-          <Route path="/Profile" element={ <><NavBar /><Profile /><Footer /></> } />
+
+          <Route path="/" element={ <AuthGhost><NavBar /><Home /><Footer /></AuthGhost>} />
+          <Route path="/SignIn" element={ <AuthNotAccess><NavBar /><SignIn /><Footer /></AuthNotAccess> } />
+          <Route path="/RegisterIn" element={ <AuthNotAccess><NavBar /><RegisterIn /><Footer /></AuthNotAccess> } />
+          <Route path="/Profile" element={ <AuthLoginPermission><NavBar /><Profile /><Footer /></AuthLoginPermission> }/>
+          <Route path="/MyOrders" element={ <AuthLoginPermission><NavBar /><MyOrders /><Footer /></AuthLoginPermission> } />
       </Routes>
     </Provider>
   );

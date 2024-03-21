@@ -4,36 +4,39 @@ import IconButton from '@mui/material/IconButton';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import {setRepeat} from "../stores/productHierarchy"
+import { useSelector } from 'react-redux';
+import { addFavorite, auth, deleteFavorite } from '../firebase';
 
 export function WideCardSearch(props) {
 
-    const { complate } = useSelector((state) => state.productHierarchy)
-    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {data, repeat} = props;
-    let complateObj = JSON.parse(localStorage.getItem("http://localhost:3000/MyFavorites")) || complate;
+    const { data } = props;
+    const { list } = useSelector((state) => state.favorite)
 
     const handleClick = (selectProduct) => {
         navigate('/ProductDetail', { state: { product: selectProduct } });
     };
 
     function whichIcon(){
-        for (let key in complateObj){
-            if (JSON.parse(complateObj[key]).id === data.id)
-                return <FavoriteIcon />
+        for (let i = 0; i < list.length; i++){
+            if (list[i].data.id === data.id){
+              return <FavoriteIcon />;
+            }
         }
         return <FavoriteBorderIcon />;
     }
 
-    function handleIcon(){
-        if (complateObj[JSON.parse(data.id)])
-            delete complateObj[data.id];
-        else
-            complateObj[JSON.parse(data.id)] = JSON.stringify(data);
-        localStorage.setItem("http://localhost:3000/MyFavorites", JSON.stringify(complateObj));
-        dispatch(setRepeat(!repeat));
+    async function handleIcon(){
+        for (let i = 0; i < list.length; i++){
+            if (list[i].data.id === data.id){
+                await deleteFavorite(list[i].id)
+                return;
+            }
+        }
+        await addFavorite({
+            data,
+            uid: auth.currentUser.uid
+        })
     }
 
   return (

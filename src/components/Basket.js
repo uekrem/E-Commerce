@@ -4,17 +4,21 @@ import { BasketCard } from './BasketCard';
 import { Button } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { EmptyPage } from './EmptyPage';
+import { useNavigate } from 'react-router-dom';
 
 export function Basket() {
 
   let result = 0;
-  const { complate, repeat } = useSelector((state) => state.productHierarchy);
-  let basketObj = JSON.parse(localStorage.getItem("http://localhost:3000/Basket")) || complate;
-  const keys = Object.keys(basketObj);
+  const navigate = useNavigate();
+  const { listBasket } = useSelector((state) => state.basket)
 
-  keys.map((key) => (
-    result += basketObj[key].price
-  ))
+  for(let i = 0; i < listBasket.length; i++){
+    result += listBasket[i].data.price * listBasket[i].count;
+  }
+
+  function handlePayment(){
+    navigate("/Payment");
+  }
 
   return (
     <div style={{
@@ -35,25 +39,25 @@ export function Basket() {
           marginTop:"30px",
           flexDirection:"column",
           }}>
-          { !Object.keys(basketObj).length ? <EmptyPage parag={"cart"} /> :
+          { !(listBasket.length > 0) ? <EmptyPage parag={"cart"} /> :
             <>
               <div id='basket'>
                 <div id="basketList">
                   {
-                    keys.map((key, index) => (
-                      <BasketCard key={index} data={basketObj[key]} repeat={repeat} basketObj={basketObj}/>
+                    listBasket.map((key, index) => (
+                      <BasketCard key={index} box={key} />
                     ))
                   }
                 </div>
     
                 <div id="invoice">
                   <div>
-                    <h3>SELECT PRODUCT ({Object.keys(basketObj).length})</h3>
+                    <h3>SELECT PRODUCT ({listBasket.length})</h3>
                     <h2>
                       {Number(result.toFixed(2)) + 3}$
                     </h2>
                   </div>
-                  <Button size="large" variant="filled">Complete Shopping</Button>
+                  <Button onClick={handlePayment} size="large" variant="filled">Complete Shopping</Button>
                   <div>
                     <h5>Product: {Number(result.toFixed(2))}$ </h5>
                     <h5>Cargo: 3$ </h5>

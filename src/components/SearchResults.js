@@ -1,13 +1,11 @@
 import React from 'react'
 import { WideCardSearch } from './WideCardSearch';
 import { useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 export function SearchResults() {
   
   const location = useLocation();
   const data = location.state.filterSearch;
-  const { repeat } = useSelector((state) => state.productHierarchy)
 
   return (
     <div style={{
@@ -32,7 +30,7 @@ export function SearchResults() {
           rowGap:"40px",
           }}>
             {data.map(function(element, index){
-              return (<WideCardSearch  key={index} data={element} repeat={repeat}/>)
+              return (<WideCardSearch  key={index} data={element}/>)
             })}
         </main>
 

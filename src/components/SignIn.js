@@ -6,23 +6,27 @@ import { useFormik } from 'formik';
 import * as Yup from "yup";
 import { VisibilityOff, Visibility } from '@mui/icons-material';
 import { InputAdornment, IconButton, Typography } from '@mui/material';
-import { login } from "../firebase.js"
 import Button from '@mui/material/Button';
-import { Toaster } from 'react-hot-toast';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { fetchLoginUser } from '../stores/auth.js';
 
 const defaultTheme = createTheme();
 
 export function SignIn() {
 
   const [showPassword, setShowPassword] = React.useState(false)
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   function handleClickShowPassword(){
     setShowPassword(!showPassword);
   };
 
   async function handleSignIn(email, password){
-    const user = await login(email, password);
-    console.log(user);
+    const user = dispatch(fetchLoginUser({email, password}));
+    if (user)
+      navigate("/", { replace:true });
   }
 
   const formik = useFormik({
@@ -33,19 +37,18 @@ export function SignIn() {
     validationSchema:
       Yup.object({
         email: Yup
-          .string('Enter your email')
-          .email('Enter a valid email')
-          .required('Email is required'),
+          .string('')
+          .email('')
+          .required(''),
         password: Yup
-          .string('Enter your password')
-          .min(8, 'Password should be of minimum 8 characters length')
-          .required('Password is required'),
+          .string('')
+          .min(6,"")
+          .required(''),
       }),
   });
 
   return (
     <ThemeProvider theme={defaultTheme}>
-        <Toaster position='top-right' />
         <div id="sayHello">
           <h3>Hello,</h3>
           <p>Log in to Trendyol or create an account, don't miss the discounts!</p>
@@ -95,7 +98,7 @@ export function SignIn() {
         </Box>
         <div id="choiceButton">
             <Button size="large" variant="filled" onClick={() => handleSignIn(formik.values.email, formik.values.password)}>Sign In</Button>
-            <Button size="large" variant="filled">Register In</Button>
+            <NavLink to="/RegisterIn"><Button size="large" variant="filled">Register In</Button></NavLink>
           </div>
     </ThemeProvider>
   );

@@ -1,18 +1,23 @@
 import React from 'react';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useSelector, useDispatch } from 'react-redux';
-import {setRepeat} from "../stores/productHierarchy"
+import { deleteBasket } from '../firebase';
+import { countDecrease, addBasket } from '../firebase';
 
 export function BasketCard(props) {
 
-  const dispatch = useDispatch();
-  let { data, basketObj, repeat } = props;
+  let { box } = props;
+  let data = box.data
 
-  function deleteCard(){
-    delete basketObj[data.id];
-    localStorage.setItem("http://localhost:3000/Basket", JSON.stringify(basketObj));
-    dispatch(setRepeat(!repeat));
+  async function deleteCard(){
+    await deleteBasket(box.id)
+  }
+
+  async function countChange(flag){
+    if (!flag)
+      await countDecrease(box)
+    else
+      await addBasket(box)
   }
   
   return (
@@ -27,6 +32,11 @@ export function BasketCard(props) {
             <h4>{data.title}</h4>
             <div className="product-bottom-details">
                 <div className="product-price" style={{color:'black'}}>{data.price}$</div>
+            </div>
+            <div id="counter">
+              <button onClick={() => countChange(0)}>-</button>
+                {box.count}
+              <button onClick={() => countChange(1)}>+</button>
             </div>
         </div>
     </div>
