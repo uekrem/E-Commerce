@@ -1,23 +1,24 @@
 import React from 'react';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { deleteBasket } from '../firebase';
-import { countDecrease, addBasket } from '../firebase';
+import { deleteBasket, countDecrease, basketAdd } from '../stores/personalSpaces';
+import { useDispatch } from 'react-redux';
 
 export function BasketCard(props) {
 
   let { box } = props;
   let data = box.data
+  const dispatch = useDispatch();
 
   async function deleteCard(){
-    await deleteBasket(box.id)
+    dispatch(deleteBasket(box.id))
   }
 
   async function countChange(flag){
     if (!flag)
-      await countDecrease(box)
+      dispatch(countDecrease(box));
     else
-      await addBasket(box)
+      dispatch(basketAdd(box));
   }
   
   return (

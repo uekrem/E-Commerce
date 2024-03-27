@@ -3,24 +3,26 @@ import Rating from '@mui/material/Rating';
 import Button from '@mui/material-next/Button';
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { deleteFavorite } from '../firebase';
-import { auth, addBasket } from '../firebase';
+import { auth } from '../firebase';
+import { useDispatch } from 'react-redux';
+import { basketAdd, deleteFavorite } from '../stores/personalSpaces';
 
 export function WideCard(props) {
 
     let { box } = props;
     let data = box.data;
+    const dispatch = useDispatch();
 
     async function favDelete(){
-        await deleteFavorite(box.id)
+        dispatch(deleteFavorite(box.id))
     }
 
     async function handleBasket(){
-        await addBasket({
+        dispatch(basketAdd({
             data,
             uid: auth.currentUser.uid,
             count:1,
-        })
+        }))
     }
 
   return (

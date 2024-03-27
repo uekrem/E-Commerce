@@ -4,31 +4,32 @@ import IconButton from '@mui/material/IconButton';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Rating from '@mui/material/Rating';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { addFavorite, auth, addBasket } from '../firebase';
-import { useSelector } from 'react-redux';
-import { deleteFavorite } from '../firebase';
+import { auth } from '../firebase';
+import { useDispatch, useSelector } from 'react-redux';
+import { basketAdd, deleteFavorite, addFavorite } from '../stores/personalSpaces';
 
 export function ProductLabels(props) {
 
-  const { list } = useSelector((state) => state.favorite)
+  const { listFavorite } = useSelector((state) => state.personalSpaces)
   const {data} = props;
+  const dispatch = useDispatch()
 
-  async function handleIcon(selectData){
-    for (let i = 0; i < list.length; i++){
-      if (list[i].data.id === data.id){
-          await deleteFavorite(list[i].id)
-          return;
+  async function handleIcon(){
+    for (let i = 0; i < listFavorite.length; i++){
+      if (listFavorite[i].data.id === data.id){
+        dispatch(deleteFavorite(listFavorite[i].id))
+        return;
       }
     }
-    await addFavorite({
+    dispatch(addFavorite({
         data,
         uid: auth.currentUser.uid
-    })
+    }))
   }
 
   function whichIcon(){
-    for (let i = 0; i < list.length; i++){
-        if (list[i].data.id === data.id){
+    for (let i = 0; i < listFavorite.length; i++){
+        if (listFavorite[i].data.id === data.id){
           return <FavoriteIcon />;
         }
     }
@@ -36,11 +37,11 @@ export function ProductLabels(props) {
   }
 
   async function handleBasket(){
-    await addBasket({
+    dispatch(basketAdd({
       data,
       uid: auth.currentUser.uid,
       count:1,
-    })
+    }))
   }
 
 

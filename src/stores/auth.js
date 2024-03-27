@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { auth } from '../firebase';
 import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import toast from 'react-hot-toast';
+import jsCookie from 'js-cookie';
 
 const initialState = {
   user: [],
@@ -29,7 +30,9 @@ const authR = createSlice({
   initialState,
   reducers: {
     userLogin: (state, action) => {
-      state.user = action.payload
+      let {user, isAuthenticated} = action.payload;
+      state.user = user;
+      state.isAuthenticated = isAuthenticated;
     },
     userLogOut: (state) => {
       state.user = [];
@@ -39,7 +42,8 @@ const authR = createSlice({
     builder.addCase(fetchLoginUser.fulfilled, (state, action) => {
       state.isLoading = false;
       state.isAuthenticated = true;
-      toast.success('Successfully Login')
+      jsCookie.set("auth", JSON.stringify([auth.currentUser]));
+      toast.success('Successfully Login');
       state.user = action.payload;
     })
     builder.addCase(fetchLoginUser.pending, (state) => {

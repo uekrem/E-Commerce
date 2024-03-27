@@ -1,14 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import productHierarchyReducer from "./stores/productHierarchy"
 import authR from "./stores/auth"
-import favoriteReduce from './stores/favorite'
-import basketReduce from "./stores/basket"
+import personalSpaces from './stores/personalSpaces'
 
 export const store = configureStore({
   reducer: {
     productHierarchy: productHierarchyReducer,
     authR,
-    favorite: favoriteReduce,
-    basket: basketReduce,
+    personalSpaces,
   },
 })

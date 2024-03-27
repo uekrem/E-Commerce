@@ -4,22 +4,24 @@ import IconButton from '@mui/material/IconButton';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { addFavorite, auth, deleteFavorite } from '../firebase';
+import { useDispatch, useSelector } from 'react-redux';
+import { addFavorite, deleteFavorite } from '../stores/personalSpaces';
+import { auth } from '../firebase';
 
 export function WideCardSearch(props) {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const { data } = props;
-    const { list } = useSelector((state) => state.favorite)
+    const { listFavorite } = useSelector((state) => state.personalSpaces)
 
     const handleClick = (selectProduct) => {
         navigate('/ProductDetail', { state: { product: selectProduct } });
     };
 
     function whichIcon(){
-        for (let i = 0; i < list.length; i++){
-            if (list[i].data.id === data.id){
+        for (let i = 0; i < listFavorite.length; i++){
+            if (listFavorite[i].data.id === data.id){
               return <FavoriteIcon />;
             }
         }
@@ -27,16 +29,16 @@ export function WideCardSearch(props) {
     }
 
     async function handleIcon(){
-        for (let i = 0; i < list.length; i++){
-            if (list[i].data.id === data.id){
-                await deleteFavorite(list[i].id)
+        for (let i = 0; i < listFavorite.length; i++){
+            if (listFavorite[i].data.id === data.id){
+                dispatch(deleteFavorite(listFavorite[i].id))
                 return;
             }
         }
-        await addFavorite({
+        dispatch(addFavorite({
             data,
             uid: auth.currentUser.uid
-        })
+        }))
     }
 
   return (

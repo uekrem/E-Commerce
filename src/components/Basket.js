@@ -10,7 +10,7 @@ export function Basket() {
 
   let result = 0;
   const navigate = useNavigate();
-  const { listBasket } = useSelector((state) => state.basket)
+  const { listBasket } = useSelector((state) => state.personalSpaces)
 
   for(let i = 0; i < listBasket.length; i++){
     result += listBasket[i].data.price * listBasket[i].count;
@@ -44,8 +44,8 @@ export function Basket() {
               <div id='basket'>
                 <div id="basketList">
                   {
-                    listBasket.map((key, index) => (
-                      <BasketCard key={index} box={key} />
+                    listBasket.map((data, index) => (
+                      <BasketCard key={index} box={data} />
                     ))
                   }
                 </div>

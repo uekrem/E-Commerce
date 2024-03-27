@@ -5,10 +5,8 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { InputAdornment, IconButton, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { userLogin } from '../stores/auth';
-import { update, auth, resetPassword, verifyProfile } from '../firebase';
+import { update, auth, resetPassword } from '../firebase';
 import toast from 'react-hot-toast';
-import NewReleasesIcon from '@mui/icons-material/NewReleases';
-import MarkEmailReadIcon from '@mui/icons-material/MarkEmailRead';
 
 export function Profile() {
 
@@ -20,10 +18,11 @@ export function Profile() {
     const [replacePass , setReplacePass] = useState();
     const [newPass, setNewPass] = useState();
     const [replaceNewPass, setReplaceNewPass] = useState();
+    console.log(user);
 
     useEffect(() => {
-        setName(user.displayName);
-        setNewEmail(user.email);
+        setName(user[0].displayName);
+        setNewEmail(user[0].email);
     }, [user]);
     
     function handleClickShowPassword(index){
@@ -51,12 +50,10 @@ export function Profile() {
     async function handleInform(){
         await update({
             displayName: name,
-            email: newEmail,
         })
-        dispatch(userLogin({
-            displayName: auth.currentUser.displayName,
-            email: auth.currentUser.email,
-        }))
+        dispatch(userLogin([{
+            ...user, displayName: auth.currentUser.displayName,
+        }]))
     }
 
   return (
@@ -99,7 +96,6 @@ export function Profile() {
                     // onChange={(e) => setNewEmail(e.target.value)}
                     />
                 </div>
-                <Button startIcon={1 ? <NewReleasesIcon /> : <MarkEmailReadIcon />} onClick={verifyProfile}>{1 ?  "Verify Email" : "Approved"}</Button>
 
                 <Button onClick={handleInform} id="leftButton" size="large" variant="filled">UPDATE</Button>
 

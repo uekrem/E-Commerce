@@ -5,7 +5,7 @@ import { EmptyPage } from './EmptyPage';
 
 export function MyFavorites() {
   
-  const { list } = useSelector((state) => state.favorite)
+  const { listFavorite } = useSelector((state) => state.personalSpaces)
 
   return (
     <div style={{
@@ -29,9 +29,9 @@ export function MyFavorites() {
             rowGap:"40px",
             }}>
             {
-              !(list.length > 0)
+              !(listFavorite.length > 0)
               ? <EmptyPage parag={"favorites"} /> :
-              list.map((key, index) => (
+              listFavorite.map((key, index) => (
                 <WideCard key={index} box={key} />
               ))
             }

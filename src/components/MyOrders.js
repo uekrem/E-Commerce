@@ -1,7 +1,20 @@
 import React from 'react'
 import { OrderCard } from './OrderCard'
+import { useDispatch, useSelector } from 'react-redux'
+import { popUpShow } from '../stores/personalSpaces'
+import { CommentPopup } from './CommentPopup'
+import { setOrderDisplay } from '../stores/personalSpaces'
 
 export function MyOrders() {
+
+  const { listOrder, isPopupChanging } = useSelector((state) => state.personalSpaces)
+  const dispatch = useDispatch();
+
+  const toggleModal = (data) => {
+    dispatch(setOrderDisplay(data))
+    dispatch(popUpShow(isPopupChanging))
+  };
+
   return (
     <div style={{
       width:"100%",  
@@ -22,11 +35,13 @@ export function MyOrders() {
           flexDirection:"column",
           }}>
 
-          <OrderCard />
+          {isPopupChanging && <CommentPopup toggleModal={toggleModal} /> }
 
-          <OrderCard />
-
-          <OrderCard />
+          {
+            listOrder.map((data, index) => {
+              return <OrderCard toggleModal={toggleModal} data={data} key={index} />;
+            })
+          }
 
         </main>
 

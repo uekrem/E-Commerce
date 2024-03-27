@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 
 export default function Review() {
 
-  const { listBasket } = useSelector((state) => state.basket)
+  const { listBasket } = useSelector((state) => state.personalSpaces)
   
   return (
     <React.Fragment>

@@ -55,7 +55,7 @@ export function NavBar() {
                     isAuthenticated ? 
                     <NavLink to="/Profile">
                         <button>
-                            <PersonIcon />{user.displayName}
+                            <PersonIcon />{user[0].displayName}
                         </button>
                     </NavLink> : 
                     <NavLink to="/SignIn">

@@ -1,35 +1,28 @@
-import * as React from 'react';
+import React from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 
-export default function AddressForm() {
+export default function AddressForm(props) {
+
+  const {data} = props;
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
         Shipping address
       </Typography>
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={12}>
           <TextField
             required
-            id="firstName"
-            name="firstName"
-            label="First name"
+            id="Name"
+            name="name"
+            label="Name"
             fullWidth
-            autoComplete="given-name"
+            value={data[0]}
             variant="standard"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="lastName"
-            name="lastName"
-            label="Last name"
-            fullWidth
-            autoComplete="family-name"
-            variant="standard"
+            onChange={(e) => data[1](e.target.value)}
           />
         </Grid>
         <Grid item xs={12}>
@@ -37,10 +30,11 @@ export default function AddressForm() {
             required
             id="address1"
             name="address1"
-            label="Address line 1"
+            label="Address"
+            value={data[2]}
             fullWidth
-            autoComplete="shipping address-line1"
             variant="standard"
+            onChange={(e) => data[3](e.target.value)}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -49,29 +43,10 @@ export default function AddressForm() {
             id="city"
             name="city"
             label="City"
-            fullWidth
-            autoComplete="shipping address-level2"
-            variant="standard"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            id="state"
-            name="state"
-            label="State/Province/Region"
+            value={data[4]}
             fullWidth
             variant="standard"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="zip"
-            name="zip"
-            label="Zip / Postal code"
-            fullWidth
-            autoComplete="shipping postal-code"
-            variant="standard"
+            onChange={(e) => data[5](e.target.value)}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -80,9 +55,10 @@ export default function AddressForm() {
             id="country"
             name="country"
             label="Country"
+            value={data[6]}
             fullWidth
-            autoComplete="shipping country"
             variant="standard"
+            onChange={(e) => data[7](e.target.value)}
           />
         </Grid>
       </Grid>

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -11,24 +11,34 @@ import Typography from '@mui/material/Typography';
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
+import { useDispatch, useSelector } from 'react-redux';
+import { addOrdering } from '../stores/personalSpaces';
+import { useNavigate } from 'react-router-dom';
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <AddressForm />;
-    case 1:
-      return <PaymentForm />;
-    case 2:
-      return <Review />;
-    default:
-      throw new Error('Unknown step');
-  }
-}
 
 export function Checkout() {
-  const [activeStep, setActiveStep] = React.useState(0);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [activeStep, setActiveStep] = useState(0);
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+  const { listBasket } = useSelector((state) => state.personalSpaces)
+  
+  function getStepContent(step) {
+    switch (step) {
+      case 0:
+        return <AddressForm data={[name, setName, address, setAddress, city, setCity, country, setCountry]} />;
+      case 1:
+        return <PaymentForm />;
+      case 2:
+        return <Review />;
+    }
+  }
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -37,6 +47,21 @@ export function Checkout() {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
+
+  function createOrder(){
+    const currentDate = new Date();
+
+    dispatch(addOrdering({
+      data:{uid:listBasket[0].uid, 
+            cargoInform:{name, address, city, country, status:0},
+            orderDate: `${currentDate.getDate()} / ${currentDate.getMonth()+1} / ${currentDate.getFullYear()}`,
+            listProduct:listBasket.map(item => {
+              const { id, uid, ...otherProperties } = item;
+              return { ...otherProperties, comment: 0 };
+            })}, 
+      uid:listBasket[0].uid}));
+    setActiveStep(activeStep + 1);
+  }
 
   return (
     <React.Fragment>
@@ -59,12 +84,10 @@ export function Checkout() {
                 Thank you for your order.
               </Typography>
               <Typography variant="subtitle1">
-                Your order number is #2001539. We have emailed your order
-                confirmation, and will send you an update when your order has
-                shipped.
+                Thank you for choosing us. You can check your products on the My Orders page.
               </Typography>
               <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                  <Button sx={{ mt: 3, ml: 1 }}>
+                  <Button onClick={() => navigate("/MyOrders")} sx={{ mt: 3, ml: 1 }}>
                     My Orders
                   </Button>
                 </Box>
@@ -81,7 +104,7 @@ export function Checkout() {
 
                 <Button
                   variant="contained"
-                  onClick={handleNext}
+                  onClick={activeStep === steps.length - 1 ? createOrder : handleNext}
                   sx={{ mt: 3, ml: 1 }}
                 >
                   {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
