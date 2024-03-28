@@ -23,5 +23,5 @@ Proje, sürekli olarak güncellenmekte ve işlevsel hale getirilmektedir. Ödeme
 | İstatistik Bölümü          |✅|
 | Kategori Bazlı Ürün Arama Ve Filtreleme |✅|
 | Marka Bazlı Ürün Filtreleme |🔄|
-| Hızlı Arama Özelliği       |✅|
+| Hızlı Arama Özelliği       |🔄|
 | Kullanıcı Tanımı |✅|
