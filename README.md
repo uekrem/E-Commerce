@@ -1,5 +1,5 @@
 ## E-Commerce-Trendyol (REACT)
-Bu projenin amacı, React dilini kullanarak Trendyol adlı tanınmış e-ticaret platformunun bir klonunu geliştirmektir. Mevcut durumda, ürünler kategorilere ayrılarak sonuçlar elde edilebilmekte, kullanıcılar giriş yapabilmekte, ödeme sayfasına yönlendirilebilmekte, sepetlerine ürün ekleyip çıkartabilmekte ve favorilere ürün ekleyip çıkartabilmektedirler. Projede gerçekleştirilen diğer geliştirmeler arasında hızlı arama ve benzeri birçok özelliğin geliştirilmesi bulunmakta ve devam etmektedir.
+Bu projenin amacı, tanınmış e-ticaret platformu Trendyol'un bir klonunu geliştirmek için React dilini kullanmaktır. Mevcut durumda, ürünler kategorilere ayrılarak sonuçlar elde edilebilmekte, kullanıcılar giriş yapabilmekte, ödeme sayfasına yönlendirilebilmekte, yorum ekleme ve yorumları görüntüleme özelliği, sepetlerine ve favorilerine ürün ekleyip çıkartabilmektedir. Projede gerçekleştirilen diğer geliştirmeler arasında hızlı arama ve benzeri birçok özelliğin geliştirilmesi bulunmakta ve devam etmektedir.
 
 <img width="400" alt="Screenshot 2024-03-09 at 17 46 51" src="https://github.com/uekrem/E-Commerce-Trendyol/assets/110349452/870f25a0-cb8c-40a4-9376-1f9b9112839b">
 <img width="400" alt="Screenshot 2024-03-09 at 17 51 00" src="https://github.com/uekrem/E-Commerce-Trendyol/assets/110349452/d3aa9b5c-3e36-4812-b3be-5652d9684ae1">
