@@ -16,7 +16,7 @@ Proje, sürekli olarak güncellenmekte ve işlevsel hale getirilmektedir. Ödeme
 | Ürün özellikleri tanımı ve kısa bilgi tanımı |✅|
 | Seo içeriğine uygun        |🔄|
 | Kargo takip alanı          |✅|
-| Puan Kazandırma ve Kullandırma |🔄|
+| Puan Kazandırma ve Kullandırma |✅|
 | Ürün Yorum Puanlama        |✅|
 | XML entegrasyonu           |🔄|
 | Mail Entegrasyonu          |✅|
