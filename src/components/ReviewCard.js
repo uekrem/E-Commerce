@@ -2,15 +2,9 @@ import React from 'react'
 import Avatar from '@mui/material/Avatar';
 import Rating from '@mui/material/Rating';
 
-export function ReviewCard() {
+export function ReviewCard({ data }) {
 
-    let result = "";
-
-    function randomName(){
-      let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-      result = characters.charAt(Math.floor(Math.random() * characters.length));
-      result += characters.charAt(Math.floor(Math.random() * characters.length));
-    }
+    let result = data.name.split(" ");
 
     function randomCensor(repeat){
       let starLen = "*";
@@ -28,22 +22,21 @@ export function ReviewCard() {
             width: 56,
             height: 56,
           },
-          children: `${result[0]}${result[1]}`,
+          children: `${result[0][0]}${result[1][0]}`,
         };
     }
     
   return (
     <div id="ReviewCard">
-        {randomName()}
         <Avatar {...stringAvatar()} />
         <div id="reviewBottom">
             <div id="reviewWho">
-                <Rating name="half-rating-read" value={Math.floor(Math.random() * (5)) + 1} size="small" precision={0.5} readOnly />
-                <p>Wednesday, May 18, 2022</p>
-                <p>{`${result[0]}${randomCensor(Math.floor(Math.random() * (6 - 1)) + 2)} ${result[1]}${randomCensor(Math.floor(Math.random() * (6 - 1)) + 2)}`}</p>
+                <Rating name="half-rating-read" value={parseInt(data.rating)} size="small" precision={1} readOnly />
+                <p>{data.date}</p>
+                <p>{`${result[0][0]}${randomCensor(result[0].length - 1)} ${result[1][0]}${randomCensor(result[1].length - 1)}`}</p>
             </div>
             <div id="reviewText">
-                <p>buraya yorum ekleburaya yorum ekledfsglldkflgkjdlfkdsakffkdlngkfldsgklfdlfjgksjdlkgfjfkldjgflkjdsgklfjsdkgjldksjlkdjgkldjkgjkdfgjlkfgdjkgfljskgjdlkfjgdpeorıgıoejrıgerogıjkdlfjglksdgkldngkfndklgdlfkjgkldjfgıdjfogjdflkgjdslkfjgkdljgkdjgıejrıgoejıgjıeogjeklgmdlfkmgkldsnlgkndfsklgmdfklgmldsfgjıdsjfgkljgfdslkgmdfklgfdnsıkuhsefusfkuhrakjfhjrkhfjkhrdkjhfjrjhfeuhfuıerhfuıhewpıfhdkgjndflkvnfdjkhoıeqhrjıoughreuıgjjergpewjgprıoewjfgıwehrguhewgkffjsdgndrngejhrpgıejgkfjkldfsjgldjgslgjfdısjgıdsjfgojdfgıjdoıfjgıdjfgojdıfjgofıdjgıfdjogıdsjıogfjoıdjgıodfjgıojdfıogjdfıjgodıfjgıodjsgıojdsfoıgjfdosıgjdosıgjoısjgıosjdfgoıdjıgsojdıosfjgıosjıfdsjogsdjgısojfgıdjgoıfjdıogjdfıogjdosıgjfdoısjgfdıogjıosjgoıffjdsıgodjfgjdfoıgjfıodsjgısjnecektir...dfsglldkflgkjdlfkdsakffkdlngkfldsgklfdlfjgksjdlkgfjfkldjgflkjdsgklfjsdkgjldksjlkdjgkldjkgjkdfgjlkfgdjkgfljskgjdlkfjgdpeorıgıoejrıgerogıjkdlfjglksdgkldngkfndklgdlfkjgkldjfgıdjfogjdflkgjdslkfjgkdljgkdjgıejrıgoejıgjıeogjeklgmdlfkmgkldsnlgkndfsklgmdfklgmldsfgjıdsjfgkljgfdslkgmdfklgfdnsıkuhsefusfkuhrakjfhjrkhfjkhrdkjhfjrjhfeuhfuıerhfuıhewpıfhdkgjndflkvnfdjkhoıeqhrjıoughreuıgjjergpewjgprıoewjfgıwehrguhewgkffjsdgndrngejhrpgıejgkfjkldfsjgldjgslgjfdısjgıdsjfgojdfgıjdoıfjgıdjfgojdıfjgofıdjgıfdjogıdsjıogfjoıdjgıodfjgıojdfıogjdfıjgodıfjgıodjsgıojdsfoıgjfdosıgjdosıgjoısjgıosjdfgoıdjıgsojdıosfjgıosjıfdsjogsdjgısojfgıdjgoıfjdıogjdfıogjdosıgjfdoısjgfdıogjıosjgoıffjdsıgodjfgjdfoıgjfıodsjgısjnecektir...</p>
+                <p>{data.text}</p>
             </div>
         </div>
     </div>

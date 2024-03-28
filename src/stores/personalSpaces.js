@@ -95,8 +95,8 @@ export const addComment = createAsyncThunk(
     }
     const washingtonRef = doc(db, "ordering", orderDisplay.id);
     await updateDoc(washingtonRef, {...orderDisplay, listProduct:newProduct});
+    await addDoc(collection(db, "comment"), {name:orderDisplay.cargoInform.name, productId:data.data.id, date:orderDisplay.orderDate, text, rating});  
     return {...orderDisplay, listProduct:newProduct};
-    // await addDoc(collection(db, "comments"), {data, text, rating});  
   }
 )
 

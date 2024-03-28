@@ -18,7 +18,6 @@ export function Profile() {
     const [replacePass , setReplacePass] = useState();
     const [newPass, setNewPass] = useState();
     const [replaceNewPass, setReplaceNewPass] = useState();
-    console.log(user);
 
     useEffect(() => {
         setName(user[0].displayName);
