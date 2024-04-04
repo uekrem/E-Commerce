@@ -8,17 +8,17 @@ export function MyThumbGallery(props) {
     const { data } = props;
 
   return (
-    <div className='myThumbGallery'>
-        <div style={{width:"100%",height:"100%"}} className='productLeft' >
+    <div>
+        <div className='productLeft' >
             <Swiper
                 spaceBetween={0}
                 navigation={true}
                 thumbs={{swiper: thumbsSwiper}}
                 modules={[FreeMode, Navigation, Thumbs]}
-                style={{width:"70%"}}
                 className='mySwiper2'
+                style={{marginBottom:"30px"}}
                 >
-                <SwiperSlide>
+                <SwiperSlide >
                     <img src={data.image} alt=""></img>
                 </SwiperSlide>
             </Swiper>

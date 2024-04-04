@@ -12,6 +12,7 @@
 }
 
 #productReview{
+    width: 100%;
     padding: 0px 50px;
 }
 
@@ -29,7 +30,6 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: auto;
     padding-left: 40px;
     padding-top: 40px;
     border-bottom: 1px solid rgb(229, 229, 229);
@@ -38,8 +38,7 @@
 #reviewBottom{
     display: flex;
     flex-direction:column;
-    width: 65%;
-    margin-left: 10px;
+    width:100%;
     padding-bottom: 60px;
     border-radius: 10px;
 }
@@ -58,9 +57,17 @@
 
 #reviewWho{
     color:rgb(145, 145, 145);
-    display: flex;
     column-gap: 30px;
     font-size: 13px;
     padding:0px 10px;
     padding-bottom: 15px;
+}
+
+@media screen and (max-width: 900px) {
+    #reviewWho{
+        justify-content: center;
+        align-items: center;
+        padding: 7px 0px;
+    }
+    
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BasketCard } from './BasketCard';
 // import { MyMultiCarousel } from './MyMultiCarousel';
-import { Button } from '@mui/material';
+import { Button, Grid, Container } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { EmptyPage } from './EmptyPage';
 import { useNavigate } from 'react-router-dom';
@@ -21,36 +21,24 @@ export function Basket() {
   }
 
   return (
-    <div style={{
-      width:"100%",  
-      height:"100%",
-      display:'flex',
-      justifyContent:"center",
-      alignItems:"start",
-      backgroundColor:"rgb(245, 245, 245)",
-      paddingBottom:"100px"
-      }}>
-
-        <main style={{
-          width:"75%",  
-          height:"100%",
-          display:'flex',
-          justifyContent:"start",
-          marginTop:"30px",
-          flexDirection:"column",
-          }}>
-          { !(listBasket.length > 0) ? <EmptyPage parag={"cart"} /> :
+    <Container maxWidth="lg">
+      <Grid container style={{marginTop:"30px"}}>
+          { !(listBasket.length > 0) 
+          ? 
+            <Grid item xs={12} md={12}>
+              <EmptyPage parag={"cart"} />
+            </Grid>
+          :
             <>
-              <div id='basket'>
-                <div id="basketList">
-                  {
-                    listBasket.map((data, index) => (
-                      <BasketCard key={index} box={data} />
-                    ))
-                  }
-                </div>
-    
-                <div id="invoice">
+              <Grid id='basket' container item>
+                <Grid id="basketList" item xs={12} md={9}>
+                    {
+                      listBasket.map((data, index) => (
+                        <BasketCard key={index} box={data} />
+                      ))
+                    }
+                </Grid>
+                <Grid id="invoice" item xs={12} md={3}>
                   <div>
                     <h3>SELECT PRODUCT ({listBasket.length})</h3>
                     <h2>
@@ -65,15 +53,12 @@ export function Basket() {
                   <div>
                     <h4>Your Earnings 🥳</h4><small>0$</small>
                   </div>
-                </div>
-              </div>
+                </Grid>
+              </Grid>
               {/* <MyMultiCarousel title="You may like" /> */}
             </>
-
           }
-
-        </main>
-
-    </div>
+      </Grid>
+    </Container>
   )
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import { WideCardSearch } from './WideCardSearch';
 import { useLocation } from 'react-router-dom';
+import { Grid, Container } from '@mui/material';
 
 export function SearchResults() {
   
@@ -8,32 +9,23 @@ export function SearchResults() {
   const data = location.state.filterSearch;
 
   return (
-    <div style={{
-      width:"100%",  
-      height:"100%",
-      display:'flex',
-      justifyContent:"center",
-      alignItems:"start",
-      paddingBottom:"100px",
-      }}>
-
-        <main style={{
-          width:"75%",  
-          height:"100%",
+    <Container maxWidth="lg">
+        <Grid container style={{
           display:'flex',
           alignItems:"center",
-          justifyContent:"start",
-          flexDirection:"row",
+          justifyContent:"center",
           marginTop:"30px",
           flexWrap:"wrap",
-          columnGap:"40px",
-          rowGap:"40px",
           }}>
             {data.map(function(element, index){
-              return (<WideCardSearch  key={index} data={element}/>)
+              return (
+                <Grid item xs={6} md={3}>
+                  <WideCardSearch  key={index} data={element}/>
+                </Grid>
+              )
             })}
-        </main>
+        </Grid>
+    </Container>
 
-    </div>
   )
 }

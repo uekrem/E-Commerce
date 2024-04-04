@@ -7,6 +7,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { auth } from '../firebase';
 import { useDispatch, useSelector } from 'react-redux';
 import { basketAdd, deleteFavorite, addFavorite } from '../stores/personalSpaces';
+import toast from 'react-hot-toast';
 
 export function ProductLabels(props) {
 
@@ -21,10 +22,13 @@ export function ProductLabels(props) {
         return;
       }
     }
-    dispatch(addFavorite({
-        data,
-        uid: auth.currentUser.uid
-    }))
+    if (auth.currentUser)
+      dispatch(addFavorite({
+          data,
+          uid: auth.currentUser.uid
+      }))
+    else
+      toast.error("Please login")
   }
 
   function whichIcon(){
@@ -37,19 +41,20 @@ export function ProductLabels(props) {
   }
 
   async function handleBasket(){
-    dispatch(basketAdd({
-      data,
-      uid: auth.currentUser.uid,
-      count:1,
-    }))
+    if (auth.currentUser)
+      dispatch(basketAdd({
+        data,
+        uid: auth.currentUser.uid,
+        count:1,
+      }))
+    else
+      toast.error("Please login")
   }
 
 
   return (
-
-        <div style={{width:"40%",height:"60%"}} className='productRight'>
+        <div className='productRight'>
             <h1>{data.title}</h1>
-            {}
             <div className="rating">
                 <Rating name="half-rating-read" value={3.30} size="small" precision={0.5} readOnly />
                 <span className="ratingNum">({data.rating.count}+)</span>    

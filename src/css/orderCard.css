@@ -1,6 +1,6 @@
 #orderCard{
-    width: 90%;
-    height: calc(100vh / 4);
+    width: 85%;
+    height: 200px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -20,7 +20,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    column-gap: 70px;
 }
 
 #topArea div{
@@ -60,7 +59,7 @@
 }
 
 #orderImg{
-    width: 10%;
+    width: 20%;
     height: 70%;
 }
 
@@ -78,4 +77,20 @@
 
 #orderCargo p{
     color:rgb(51, 51, 51);
+}
+
+@media screen and (max-width: 900px) {
+    #orderCard{
+        height: 500px;
+    }
+    #topArea {
+        height: 250px;
+    }
+    #bottomArea{
+        height: 200px;
+    }
+    #orderImg{
+        width: 30%;
+        height: 70%;
+    }
 }

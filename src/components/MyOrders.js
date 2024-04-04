@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { popUpShow } from '../stores/personalSpaces'
 import { CommentPopup } from './CommentPopup'
 import { setOrderDisplay } from '../stores/personalSpaces'
+import { Container, Grid } from '@mui/material'
 
 export function MyOrders() {
 
@@ -16,35 +17,22 @@ export function MyOrders() {
   };
 
   return (
-    <div style={{
-      width:"100%",  
-      height:"100%",
-      display:'flex',
-      justifyContent:"center",
-      alignItems:"start",
-      paddingBottom:"100px",
-      }}>
+    <Container  maxWidth="lg">
 
-        <main style={{
-          width:"75%",  
-          height:"100%",
-          display:'flex',
-          alignItems:"center",
-          justifyContent:"start",
-          marginTop:"30px",
-          flexDirection:"column",
-          }}>
+        <Grid container style={{marginTop:"30px"}}>
 
           {isPopupChanging && <CommentPopup toggleModal={toggleModal} /> }
 
           {
             listOrder.map((data, index) => {
-              return <OrderCard toggleModal={toggleModal} data={data} key={index} />;
+              return <Grid key={index} justifyContent="center" alignItems="center" container item xs={12} md={12}> 
+                      <OrderCard toggleModal={toggleModal} data={data} key={index} />
+                    </Grid>
             })
           }
 
-        </main>
+        </Grid>
 
-    </div>
+    </Container>
   )
 }

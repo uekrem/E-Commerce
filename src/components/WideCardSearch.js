@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addFavorite, deleteFavorite } from '../stores/personalSpaces';
 import { auth } from '../firebase';
+import toast from 'react-hot-toast';
 
 export function WideCardSearch(props) {
 
@@ -35,10 +36,13 @@ export function WideCardSearch(props) {
                 return;
             }
         }
-        dispatch(addFavorite({
-            data,
-            uid: auth.currentUser.uid
-        }))
+        if (auth.currentUser)
+            dispatch(addFavorite({
+                data,
+                uid: auth.currentUser.uid
+            }))
+        else
+            toast.error("Please login")
     }
 
   return (

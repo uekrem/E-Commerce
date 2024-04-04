@@ -1,11 +1,10 @@
 import React from 'react'
 import Rating from '@mui/material/Rating';
-import Button from '@mui/material-next/Button';
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { auth } from '../firebase';
+// import { auth } from '../firebase';
 import { useDispatch } from 'react-redux';
-import { basketAdd, deleteFavorite } from '../stores/personalSpaces';
+import { deleteFavorite } from '../stores/personalSpaces';
 
 export function WideCard(props) {
 
@@ -17,13 +16,13 @@ export function WideCard(props) {
         dispatch(deleteFavorite(box.id))
     }
 
-    async function handleBasket(){
-        dispatch(basketAdd({
-            data,
-            uid: auth.currentUser.uid,
-            count:1,
-        }))
-    }
+    // async function handleBasket(){
+    //     dispatch(basketAdd({
+    //         data,
+    //         uid: auth.currentUser.uid,
+    //         count:1,
+    //     }))
+    // }
 
   return (
     <div id='wideCard'>
@@ -39,10 +38,15 @@ export function WideCard(props) {
                 <Rating name="half-rating-read" value={parseFloat(data.rating.rate)} size="small" precision={0.5} readOnly />
                 <span className="ratingNum">({data.rating.count}+)</span>  
             </div>
-            <div className="product-bottom-details product-bottom-location">
-            <div className="product-price"> {data.discount ? <small>$230.99</small> : ""}{data.price}$</div>
-                <Button onClick={handleBasket} size="large" variant="filled">ADD BASKET</Button>
+            <div className="product-bottom-details">
+                <div className="product-price"> {data.discount ? <small>$230.99</small> : ""}{data.price}$</div>
             </div>
+            {/* <div className="product-bottom-details product-bottom-location">
+                <div className="product-price"> {data.discount ? <small>$230.99</small> : ""}{data.price}$</div>
+                <IconButton size="normal">
+                  <AddShoppingCartIcon fontSize="inherit" />
+                </IconButton>
+            </div> */}
         </div>
     </div>
   )

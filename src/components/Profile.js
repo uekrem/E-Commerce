@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Button } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { InputAdornment, IconButton, Typography } from '@mui/material';
+import { InputAdornment, IconButton, Typography, Grid, Button, Container} from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { userLogin } from '../stores/auth';
 import { update, auth, resetPassword } from '../firebase';
@@ -56,24 +55,13 @@ export function Profile() {
     }
 
   return (
-    
-    <div style={{
-        width:"100%",  
-        height:"100%",
-        display:'flex',
-        justifyContent:"center",
-        alignItems:"start",
-        paddingBottom:"100px",
-        }}>
-  
-        <main id="profile">
-
-            <div id="leftProfile">
-            <Typography sx={{color:"rgb(243, 121, 25)",paddingBottom:"10px"}} component="h1" variant="h6">
-                My Membership Information
-            </Typography>
-                <div id="nameSurBlock">
-                    <div id="nameBlock">
+        <Container maxWidth="lg">
+            <Grid container id="profile">
+                <Grid id="leftProfile" container item xs={12} md={6}>
+                    <Typography sx={{color:"rgb(243, 121, 25)",paddingBottom:"10px"}} component="h1" variant="h6">
+                        My Membership Information
+                    </Typography>
+                    <Grid container item xs={6} md={6}>
                         <label>Name</label>
                         <TextField
                         id="name"
@@ -82,108 +70,110 @@ export function Profile() {
                         value={name || ""}
                         onChange={(e) => setName(e.target.value)}
                         />
-                    </div>
-                </div>
+                    </Grid>
 
-                <div>
-                    <label>E-Mail</label>
-                    <TextField
-                    id="email"
-                    name="email"
-                    disabled
-                    value={newEmail || ""}
-                    // onChange={(e) => setNewEmail(e.target.value)}
-                    />
-                </div>
+                    <Grid container item xs={6} md={6}>
+                        <label>E-Mail</label>
+                        <TextField
+                        id="email"
+                        name="email"
+                        disabled
+                        value={newEmail || ""}
+                        />
+                    </Grid>
 
-                <Button onClick={handleInform} id="leftButton" size="large" variant="filled">UPDATE</Button>
+                    <Grid container item xs={6} md={6}>
+                        <Button onClick={handleInform} id="leftButton" size="large" variant="filled">UPDATE</Button>
+                    </Grid>
 
-            </div>
+                </Grid>
 
-            <div id="rightProfile">
+                <Grid id="rightProfile" container item xs={12} md={6}>
 
-                <Typography sx={{color:"rgb(243, 121, 25)",paddingBottom:"10px"}} component="h1" variant="h6">
-                    Password Update
-                </Typography>
+                    <Typography sx={{color:"rgb(243, 121, 25)",paddingBottom:"10px"}} component="h1" variant="h6">
+                        Password Update
+                    </Typography>
 
-                <div>
-                    <label>Current password</label>
-                    <TextField
-                    name="password"
-                    type={showPassword[0] ? 'text' : 'password'}
-                    id="password"
-                    value={replacePass}
-                    onChange={(e) => setReplacePass(e.target.value)}
-                    InputProps={{
-                        endAdornment: (
-                        <InputAdornment position="end">
-                            <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={() => handleClickShowPassword(0)}
-                            edge="end"
-                            sx={{backgroundColor:"rgb(250, 250, 250)"}}
-                            >
-                            {showPassword[0] ? <VisibilityOff /> : <Visibility />}
-                            </IconButton>
-                        </InputAdornment>
-                        ),
-                    }}
-                    />
-                </div>
+                    <Grid container item xs={6} md={6}>
+                        <label>Current password</label>
+                        <TextField
+                        name="password"
+                        type={showPassword[0] ? 'text' : 'password'}
+                        id="password"
+                        value={replacePass}
+                        onChange={(e) => setReplacePass(e.target.value)}
+                        InputProps={{
+                            endAdornment: (
+                            <InputAdornment position="end">
+                                <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={() => handleClickShowPassword(0)}
+                                edge="end"
+                                sx={{backgroundColor:"rgb(250, 250, 250)"}}
+                                >
+                                {showPassword[0] ? <VisibilityOff /> : <Visibility />}
+                                </IconButton>
+                            </InputAdornment>
+                            ),
+                        }}
+                        />
+                    </Grid>
 
-                <div>
-                    <label>New password</label>
-                    <TextField
-                    name="password"
-                    type={showPassword[1] ? 'text' : 'password'}
-                    id="password"
-                    value={newPass}
-                    onChange={(e) => setNewPass(e.target.value)}
-                    InputProps={{
-                        endAdornment: (
-                        <InputAdornment position="end">
-                            <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={() => handleClickShowPassword(1)}
-                            edge="end"
-                            sx={{backgroundColor:"rgb(250, 250, 250)"}}
-                            >
-                            {showPassword[1] ? <VisibilityOff /> : <Visibility />}
-                            </IconButton>
-                        </InputAdornment>
-                        ),
-                    }}
-                    />
-                </div>
+                    <Grid container item xs={6} md={6}>
+                        <label>New password</label>
+                        <TextField
+                        name="password"
+                        type={showPassword[1] ? 'text' : 'password'}
+                        id="password"
+                        value={newPass}
+                        onChange={(e) => setNewPass(e.target.value)}
+                        InputProps={{
+                            endAdornment: (
+                            <InputAdornment position="end">
+                                <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={() => handleClickShowPassword(1)}
+                                edge="end"
+                                sx={{backgroundColor:"rgb(250, 250, 250)"}}
+                                >
+                                {showPassword[1] ? <VisibilityOff /> : <Visibility />}
+                                </IconButton>
+                            </InputAdornment>
+                            ),
+                        }}
+                        />
+                    </Grid>
 
-                <div>
-                    <label>New password (Again)</label>
-                    <TextField
-                    name="password"
-                    type={showPassword[2] ? 'text' : 'password'}
-                    id="password"
-                    value={replaceNewPass}
-                    onChange={(e) => setReplaceNewPass(e.target.value)}
-                    InputProps={{
-                        endAdornment: (
-                        <InputAdornment position="end">
-                            <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={() => handleClickShowPassword(2)}
-                            edge="end"
-                            sx={{backgroundColor:"rgb(250, 250, 250)"}}
-                            >
-                            {showPassword[2] ? <VisibilityOff /> : <Visibility />}
-                            </IconButton>
-                        </InputAdornment>
-                        ),
-                    }}
-                    />
+                    <Grid container item xs={6} md={6}>
+                        <label>New password (Again)</label>
+                        <TextField
+                        name="password"
+                        type={showPassword[2] ? 'text' : 'password'}
+                        id="password"
+                        value={replaceNewPass}
+                        onChange={(e) => setReplaceNewPass(e.target.value)}
+                        InputProps={{
+                            endAdornment: (
+                            <InputAdornment position="end">
+                                <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={() => handleClickShowPassword(2)}
+                                edge="end"
+                                sx={{backgroundColor:"rgb(250, 250, 250)"}}
+                                >
+                                {showPassword[2] ? <VisibilityOff /> : <Visibility />}
+                                </IconButton>
+                            </InputAdornment>
+                            ),
+                        }}
+                        />
+                    </Grid>
 
-                    <Button onClick={handlePass} id="rightButton" size="large" variant="filled">UPDATE</Button>
-                </div>
-            </div>
-        </main>
-    </div>
+                    <Grid container item xs={6} md={6}>
+                        <Button onClick={handlePass} id="rightButton" size="large" variant="filled">UPDATE</Button>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Container>
   )
 }

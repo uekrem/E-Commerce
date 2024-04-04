@@ -3,6 +3,7 @@ import React from 'react';
 import { MyMultiCarousel } from "./MyMultiCarousel.js"
 import { RowsBoxes } from "./ RowsBoxes.js"
 import { useSelector } from 'react-redux';
+import { Grid, Container } from '@mui/material';
 
 export function Home() {
 
@@ -12,18 +13,8 @@ export function Home() {
     return;
   
   return (
-    <div style={{
-      width:"100%",  
-      height:"100%",
-      display:'flex',
-      justifyContent:"center",
-      alignItems:"start",
-      paddingBottom:"100px",
-      }}>
-
-        <main style={{
-          width:"75%",  
-          height:"100%",
+    <Container maxWidth="lg">
+        <Grid container style={{
           display:'flex',
           alignItems:"center",
           justifyContent:"start",
@@ -43,8 +34,7 @@ export function Home() {
 
           <MyMultiCarousel data={inform} categ="women's clothing" title="Mixed selected products" />
 
-        </main>
-
-    </div>
+        </Grid>
+    </Container>
   )
 }

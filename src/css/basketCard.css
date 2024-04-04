@@ -1,10 +1,10 @@
 .basketCard{
     position: relative;
     width:100%;
-    height: calc(100vh / 4);
+    height: 170px;
     display: flex;
     align-items: center;
-    padding-left: 50px;
+    padding-left: 60px;
     column-gap: 50px;
     background-color: white;
     border-radius:10px;
@@ -30,13 +30,23 @@
     row-gap: 30px;
 }
 
+#basketInfo h4{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-height: 2.4em;
+    white-space: normal;
+    padding-right: 20px;
+}
+
 #invoice{
     width:"25%";
     height:"100%";
     min-height:calc(100vh / 2);
     background-color:black;
     border-radius: 10px;
-    margin-left: 20px;
+
 }
 
 #counter{

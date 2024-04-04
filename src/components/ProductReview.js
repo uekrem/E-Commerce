@@ -2,6 +2,7 @@ import { ReviewCard } from './ReviewCard';
 import { db } from '../firebase';
 import { collection, where, query, onSnapshot } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
+import { Grid } from '@mui/material';
 
 export function ProductReview({data}) {
 
@@ -16,14 +17,16 @@ export function ProductReview({data}) {
   }, [data])
 
   return (
-    <div id="productReview">
+    <Grid container item id="productReview">
       {
         reviewList ? 
         reviewList.map((element, index) => {
-          return <ReviewCard key={index} data={element} />;
+          return  <Grid item container>
+                    <ReviewCard key={index} data={element} />
+                  </Grid>
         })
         : ""
       }
-    </div>
+    </Grid>
   )
 }

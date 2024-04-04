@@ -1,6 +1,5 @@
 #leftProfile{
-    width: 50%;
-    min-height: calc(100vh / 1.5);
+    min-height: 500px;
     border:1px solid rgb(226, 226, 226);
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -8,11 +7,11 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-bottom: 30px;
 }
 
 #rightProfile{
-    width: 50%;
-    min-height: calc(100vh / 1.5);
+    min-height: 500px;
     border:1px solid rgb(226, 226, 226);
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -20,6 +19,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-bottom: 30px;
 }
 
 #leftProfile > div, #rightProfile > div{
@@ -29,19 +29,13 @@
     row-gap: 7px;
 }
 
-#nameBlock, #surBlock{
+#surBlock{
     display: flex;
     flex-direction: column;
     row-gap: 7px;
 }
 
-#nameBlock{
-    margin-bottom: 18px;
-}
-
 #profile{
-    width:75%;  
-    height:100%;
     display:flex;
     align-items:center;
     justify-content:flex-start;
@@ -50,14 +44,9 @@
 }
 
 #leftButton, #rightButton{
-    width: 60%;
     background-color:rgb(242, 121, 25);
     color: white;
     margin-top: 25px;
-}
-
-#rightButton{
-    width: 314px;
 }
 
 #leftButton:hover{

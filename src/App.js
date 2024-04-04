@@ -38,19 +38,19 @@ import { Provider } from 'react-redux'
 
 export default function App() {
   return (
-    <Provider store={store}>
-      <Routes>
-          <Route path="/Payment" element={ <><Checkout /></> } />
-          <Route path="/SearchResults" element={ <AuthGhost><NavBar /><SearchResults /><Footer /></AuthGhost> } />
-          <Route path="/ProductDetail" element={ <AuthGhost><NavBar /><ProductDetail /><Footer /></AuthGhost> } />
-          <Route path="/" element={ <AuthGhost><NavBar /><Home /><Footer /></AuthGhost>} />
-          <Route path="/SignIn" element={ <AuthNotAccess><NavBar /><SignIn /><Footer /></AuthNotAccess> } />
-          <Route path="/RegisterIn" element={ <AuthNotAccess><NavBar /><RegisterIn /><Footer /></AuthNotAccess> } />
-          <Route path="/MyFavorites" element={ <AuthLoginPermission><NavBar /><MyFavorites /><Footer /></AuthLoginPermission> } />
-          <Route path="/Basket" element={ <AuthLoginPermission><NavBar /><Basket /><Footer /></AuthLoginPermission> } />
-          <Route path="/Profile" element={ <AuthLoginPermission><NavBar /><Profile /><Footer /></AuthLoginPermission> }/>
-          <Route path="/MyOrders" element={ <AuthGhost><NavBar /><MyOrders /><Footer /></AuthGhost> } />
-      </Routes>
-    </Provider>
+      <Provider store={store}>
+        <Routes>
+            <Route path="/Payment" element={ <><Checkout /></> } />
+            <Route path="/SearchResults" element={ <><NavBar /><SearchResults /><Footer /></> } />
+            <Route path="/ProductDetail" element={ <><NavBar /><ProductDetail /><Footer /></> } />
+            <Route path="/" element={ <AuthGhost><NavBar /><Home /><Footer /></AuthGhost>} />
+            <Route path="/SignIn" element={ <AuthNotAccess><NavBar /><SignIn /><Footer /></AuthNotAccess> } />
+            <Route path="/RegisterIn" element={ <AuthNotAccess><NavBar /><RegisterIn /><Footer /></AuthNotAccess> } />
+            <Route path="/MyFavorites" element={ <AuthLoginPermission><NavBar /><MyFavorites /><Footer /></AuthLoginPermission> } />
+            <Route path="/Basket" element={ <AuthLoginPermission><NavBar /><Basket /><Footer /></AuthLoginPermission> } />
+            <Route path="/Profile" element={ <AuthLoginPermission><NavBar /><Profile /><Footer /></AuthLoginPermission> }/>
+            <Route path="/MyOrders" element={ <AuthGhost><NavBar /><MyOrders /><Footer /></AuthGhost> } />
+        </Routes>
+      </Provider>
   );
 }
