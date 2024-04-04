@@ -1,5 +1,6 @@
 import { Navigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import Loading from './Loading';
 
 export const AuthNotAccess = ({ children }) => {
   const { isLoading, isAuthenticated } = useSelector((state) => state.authR)
@@ -8,7 +9,7 @@ export const AuthNotAccess = ({ children }) => {
     return <Navigate to="/Profile" replace />
   }
   if (isLoading || isLoadingPersonal) {
-    return 'Loading...'
+    return <Loading />
   }
   return children
 }

@@ -19,7 +19,7 @@ export function MyThumbGallery(props) {
                 style={{marginBottom:"30px"}}
                 >
                 <SwiperSlide >
-                    <img src={data.image} alt=""></img>
+                    <img src={data.image} alt="productImage"></img>
                 </SwiperSlide>
             </Swiper>
 

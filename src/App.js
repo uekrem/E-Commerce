@@ -25,6 +25,7 @@ import "./css/rowsBoxes.css"
 import "./css/multiCard.css"
 import "./css/basketCard.css"
 import "./css/basket.css"
+import "./css/loading.css"
 import "./css/profile.css"
 import "./css/productInfo.css"
 import 'swiper/css';
@@ -42,7 +43,7 @@ export default function App() {
         <Routes>
             <Route path="/Payment" element={ <><Checkout /></> } />
             <Route path="/SearchResults" element={ <><NavBar /><SearchResults /><Footer /></> } />
-            <Route path="/ProductDetail" element={ <><NavBar /><ProductDetail /><Footer /></> } />
+            <Route path="/ProductDetail" element={ <AuthGhost><NavBar /><ProductDetail /><Footer /></AuthGhost> } />
             <Route path="/" element={ <AuthGhost><NavBar /><Home /><Footer /></AuthGhost>} />
             <Route path="/SignIn" element={ <AuthNotAccess><NavBar /><SignIn /><Footer /></AuthNotAccess> } />
             <Route path="/RegisterIn" element={ <AuthNotAccess><NavBar /><RegisterIn /><Footer /></AuthNotAccess> } />
