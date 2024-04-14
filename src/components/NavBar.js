@@ -11,6 +11,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { Toaster } from 'react-hot-toast';
 import { fetchLogoutUser } from '../stores/auth';
 import { Grid, Container } from '@mui/material';
+import jsCookie from 'js-cookie';
 
 export function NavBar() {
 
@@ -35,7 +36,8 @@ export function NavBar() {
     }
 
     async function handleLogout(){
-        dispatch(fetchLogoutUser())
+        dispatch(fetchLogoutUser());
+        jsCookie.remove('auth');
         navigate("/", { replace:true });
     }
 
@@ -67,7 +69,7 @@ export function NavBar() {
                                 isAuthenticated ? 
                                 <NavLink to="/Profile">
                                     <button>
-                                        <PersonIcon />{"user[0].displayName"}
+                                        <PersonIcon />{JSON.parse(jsCookie.get("auth"))[0].displayName}
                                     </button>
                                 </NavLink> : 
                                 <NavLink to="/SignIn">

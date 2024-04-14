@@ -8,12 +8,7 @@ import { userLogin } from "./stores/auth.js";
 import jsCookie from "js-cookie";
 
 const firebaseConfig = {
-  apiKey: "",
-  authDomain: "",
-  projectId: "",
-  storageBucket: "",
-  messagingSenderId: "",
-  appId: ""
+  
 };
 
 const app = initializeApp(firebaseConfig);

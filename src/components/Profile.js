@@ -6,12 +6,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userLogin } from '../stores/auth';
 import { update, auth, resetPassword } from '../firebase';
 import toast from 'react-hot-toast';
+import jsCookie from 'js-cookie';
 
 export function Profile() {
 
     const { user } = useSelector((state) => state.authR)
-    const [name, setName] = useState();
-    const [newEmail, setNewEmail] = useState();
+    const [name, setName] = useState("");
+    const [newEmail, setNewEmail] = useState("");
     const dispatch = useDispatch()
     const [showPassword, setShowPassword] = useState({0:false,1:false,2:false})
     const [replacePass , setReplacePass] = useState();
@@ -19,9 +20,9 @@ export function Profile() {
     const [replaceNewPass, setReplaceNewPass] = useState();
 
     useEffect(() => {
-        setName(user[0].displayName);
-        setNewEmail(user[0].email);
-    }, [user]);
+        setName(JSON.parse(jsCookie.get("auth"))[0].displayName);
+        setNewEmail(JSON.parse(jsCookie.get("auth"))[0].email);
+    }, []);
     
     function handleClickShowPassword(index){
         setShowPassword(prevState => ({
@@ -49,9 +50,11 @@ export function Profile() {
         await update({
             displayName: name,
         })
-        dispatch(userLogin([{
-            ...user, displayName: auth.currentUser.displayName,
-        }]))
+        // dispatch(userLogin([{
+        //     ...user, displayName: name, isAuthenticated:true,
+        // }]))
+        // jsCookie.remove("auth")
+        jsCookie.set("auth", JSON.stringify([{...user, displayName: name}]));
     }
 
   return (
@@ -67,7 +70,7 @@ export function Profile() {
                         id="name"
                         name="name"
                         autoFocus
-                        value={name || ""}
+                        value={name}
                         onChange={(e) => setName(e.target.value)}
                         />
                     </Grid>
@@ -78,7 +81,7 @@ export function Profile() {
                         id="email"
                         name="email"
                         disabled
-                        value={newEmail || ""}
+                        value={newEmail}
                         />
                     </Grid>
 

@@ -42,7 +42,7 @@ export default function App() {
       <Provider store={store}>
         <Routes>
             <Route path="/Payment" element={ <><Checkout /></> } />
-            <Route path="/SearchResults" element={ <><NavBar /><SearchResults /><Footer /></> } />
+            <Route path="/SearchResults" element={ <AuthGhost><NavBar /><SearchResults /><Footer /></AuthGhost> } />
             <Route path="/ProductDetail" element={ <AuthGhost><NavBar /><ProductDetail /><Footer /></AuthGhost> } />
             <Route path="/" element={ <AuthGhost><NavBar /><Home /><Footer /></AuthGhost>} />
             <Route path="/SignIn" element={ <AuthNotAccess><NavBar /><SignIn /><Footer /></AuthNotAccess> } />

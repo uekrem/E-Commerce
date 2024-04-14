@@ -2,11 +2,13 @@ import React from 'react'
 import { WideCardSearch } from './WideCardSearch';
 import { useLocation } from 'react-router-dom';
 import { Grid, Container } from '@mui/material';
+import { useSelector } from 'react-redux';
 
 export function SearchResults() {
-  
+
+  const {inform} = useSelector((state) => state.productHierarchy);
   const location = useLocation();
-  const data = location.state.filterSearch;
+  const data = location.state ? location.state.filterSearch : inform;  
 
   return (
     <Container maxWidth="lg">
