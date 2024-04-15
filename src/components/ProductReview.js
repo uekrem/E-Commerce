@@ -21,7 +21,7 @@ export function ProductReview({data}) {
       {
         reviewList ? 
         reviewList.map((element, index) => {
-          return  <Grid item container>
+          return  <Grid key={index} item container>
                     <ReviewCard key={index} data={element} />
                   </Grid>
         })

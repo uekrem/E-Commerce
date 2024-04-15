@@ -7,11 +7,11 @@ import {Grid} from '@mui/material';
 
 export function  RowsBoxes() {
   return (
-    <Grid container sx={12} md={12} item className='rowsBoxes'>
+    <Grid container item className='rowsBoxes'>
         {rowBoxData.map((element, index) => {
             return (
-                <Grid item sx={6} md={3}>
-                    <Card key={index}>
+                <Grid key={index} item md={3}>
+                    <Card>
                         <CardActionArea>
                             <CardMedia
                             component="img"

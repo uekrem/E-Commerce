@@ -102,7 +102,7 @@ export function Profile() {
                         <TextField
                         name="password"
                         type={showPassword[0] ? 'text' : 'password'}
-                        id="password"
+                        className="password"
                         value={replacePass}
                         onChange={(e) => setReplacePass(e.target.value)}
                         InputProps={{
@@ -127,7 +127,7 @@ export function Profile() {
                         <TextField
                         name="password"
                         type={showPassword[1] ? 'text' : 'password'}
-                        id="password"
+                        className="password"
                         value={newPass}
                         onChange={(e) => setNewPass(e.target.value)}
                         InputProps={{
@@ -152,7 +152,7 @@ export function Profile() {
                         <TextField
                         name="password"
                         type={showPassword[2] ? 'text' : 'password'}
-                        id="password"
+                        className="password"
                         value={replaceNewPass}
                         onChange={(e) => setReplaceNewPass(e.target.value)}
                         InputProps={{

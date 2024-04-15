@@ -28,6 +28,7 @@ import "./css/basket.css"
 import "./css/loading.css"
 import "./css/profile.css"
 import "./css/productInfo.css"
+import "./css/errorPage.css"
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';

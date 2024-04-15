@@ -21,7 +21,7 @@ export function SearchResults() {
           }}>
             {data.map(function(element, index){
               return (
-                <Grid item xs={6} md={3}>
+                <Grid key={index} item xs={6} md={3}>
                   <WideCardSearch  key={index} data={element}/>
                 </Grid>
               )

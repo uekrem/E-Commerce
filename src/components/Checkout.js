@@ -106,7 +106,7 @@ export function Checkout() {
                   variant="contained"
                   onClick={activeStep === steps.length - 1 ? createOrder : handleNext}
                   sx={{ mt: 3, ml: 1 }}
-                  disabled= {!(name.length && address.length && city.length && country.length)}
+                  disabled= {!((name.split(' ').length === 2 && name.split(' ')[1]) && address.length && city.length && country.length)}
                 >
                   {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
                 </Button>

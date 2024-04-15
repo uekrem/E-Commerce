@@ -1,0 +1,29 @@
+.errorPage{
+    min-height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.errorPage > *{
+    font-size: 40px;
+    color:rgb(241, 122, 26);
+}
+
+.errorPage > p{
+    font-size: 25px;
+    color:rgb(241, 122, 26);
+}
+
+.errorPage > Button{
+    font-size: 15px;
+    color:white;
+    background-color: rgb(241, 122, 26);
+}
+
+.errorPage > Button:hover{
+    color:rgb(241, 122, 26);
+    background-color: rgb(255, 251, 248);
+}
