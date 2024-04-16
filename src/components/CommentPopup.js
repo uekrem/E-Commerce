@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 import { CommentBox } from './CommentBox';
 import { useSelector } from 'react-redux';
 
@@ -12,6 +12,7 @@ export function CommentPopup(props) {
     <div className="modal">
         <div onClick={toggleModal} className="overlay"></div>
         <Grid className="modal-content" rowGap={2} container>
+          <Button id="close-modal" onClick={toggleModal}>CLOSE</Button>
           {
             orderDisplay.listProduct.map((data, index) => {
               if (!data.comment)

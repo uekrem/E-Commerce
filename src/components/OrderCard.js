@@ -68,7 +68,7 @@ export function OrderCard(props) {
                         }}
                         size="large"
                         variant="filled">
-                        {isPopupChanging ? "Close" : "Comment"}
+                        Comment
                     </Button>
                 </Grid>
             </Grid>

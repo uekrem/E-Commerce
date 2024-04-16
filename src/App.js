@@ -28,7 +28,6 @@ import "./css/basket.css"
 import "./css/loading.css"
 import "./css/profile.css"
 import "./css/productInfo.css"
-import "./css/errorPage.css"
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -42,16 +41,18 @@ export default function App() {
   return (
       <Provider store={store}>
         <Routes>
-            <Route path="/Payment" element={ <><Checkout /></> } />
             <Route path="/SearchResults" element={ <AuthGhost><NavBar /><SearchResults /><Footer /></AuthGhost> } />
             <Route path="/ProductDetail" element={ <AuthGhost><NavBar /><ProductDetail /><Footer /></AuthGhost> } />
             <Route path="/" element={ <AuthGhost><NavBar /><Home /><Footer /></AuthGhost>} />
+            
             <Route path="/SignIn" element={ <AuthNotAccess><NavBar /><SignIn /><Footer /></AuthNotAccess> } />
             <Route path="/RegisterIn" element={ <AuthNotAccess><NavBar /><RegisterIn /><Footer /></AuthNotAccess> } />
+            
+            <Route path="/Payment" element={ <AuthLoginPermission><Checkout /></AuthLoginPermission> } />
             <Route path="/MyFavorites" element={ <AuthLoginPermission><NavBar /><MyFavorites /><Footer /></AuthLoginPermission> } />
             <Route path="/Basket" element={ <AuthLoginPermission><NavBar /><Basket /><Footer /></AuthLoginPermission> } />
             <Route path="/Profile" element={ <AuthLoginPermission><NavBar /><Profile /><Footer /></AuthLoginPermission> }/>
-            <Route path="/MyOrders" element={ <AuthGhost><NavBar /><MyOrders /><Footer /></AuthGhost> } />
+            <Route path="/MyOrders" element={ <AuthLoginPermission><NavBar /><MyOrders /><Footer /></AuthLoginPermission> } />
         </Routes>
       </Provider>
   );

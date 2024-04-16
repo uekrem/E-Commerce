@@ -97,7 +97,7 @@ export function Profile() {
                         Password Update
                     </Typography>
 
-                    <Grid container item xs={6} md={6}>
+                    <Grid container spacing={2} item xs={6} md={6}>
                         <label>Current password</label>
                         <TextField
                         name="password"
@@ -122,7 +122,7 @@ export function Profile() {
                         />
                     </Grid>
 
-                    <Grid container item xs={6} md={6}>
+                    <Grid container spacing={2} item xs={6} md={6}>
                         <label>New password</label>
                         <TextField
                         name="password"
@@ -147,7 +147,7 @@ export function Profile() {
                         />
                     </Grid>
 
-                    <Grid container item xs={6} md={6}>
+                    <Grid container spacing={2} item xs={6} md={6}>
                         <label>New password (Again)</label>
                         <TextField
                         name="password"
