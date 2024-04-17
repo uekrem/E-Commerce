@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PersonIcon from '@mui/icons-material/Person';
 import { NavLink, useNavigate } from 'react-router-dom';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import SearchBar from '@mkyy/mui-search-bar';
 import { useSelector, useDispatch } from 'react-redux';
 import { setInform } from '../stores/productHierarchy';
 import LoginIcon from '@mui/icons-material/Login';
@@ -12,6 +11,7 @@ import { Toaster } from 'react-hot-toast';
 import { fetchLogoutUser } from '../stores/auth';
 import { Grid, Container } from '@mui/material';
 import jsCookie from 'js-cookie';
+import SearchIcon from '@mui/icons-material/Search';
 
 export function NavBar() {
 
@@ -19,6 +19,7 @@ export function NavBar() {
     const dispatch = useDispatch();
     const {inform} = useSelector((state) => state.productHierarchy);
     const {user, isAuthenticated} = useSelector((state) => state.authR);
+    const [searchKey, setSearchKey] = useState("");
     
     async function fetchData() {
         const response = await fetch('https://fakestoreapi.com/products');
@@ -33,6 +34,14 @@ export function NavBar() {
     function CategRoute(categ){
         const list = inform.filter((elemant) => elemant.category.includes(categ))
         navigate('/SearchResults', { state: { filterSearch: list } })
+    }
+
+    function searchForwarding(e, type){
+        if ((e.key === "Enter" && searchKey !== "") 
+            || (type === 2 && searchKey !== "")){
+            const list = inform.filter((elemant) => elemant.title.toLowerCase().includes(searchKey.toLowerCase()))
+            navigate('/SearchResults', list.length ? { state: { filterSearch: list } } : "")
+        }
     }
 
     async function handleLogout(){
@@ -53,12 +62,27 @@ export function NavBar() {
                             <NavLink to="/"><img src='https://cdn.dsmcdn.com/web/logo/ty-web.svg' alt=""></img></NavLink>
                         </Grid>
                         <Grid className='NavbarItemCenter' item xs={12} md={9}>
-                            <SearchBar 
+                            {/* <SearchBar 
                                 style={{
                                 border:"1px solid black",
                                 }}
                                 width="80%"
-                            />
+                                value={searchKey}
+                                onChange={() => setSearchKey()}
+                                // onRequestSearch={() => searchForwarding()}
+                            /> */}
+                                <div className="search">
+                                    <input 
+                                    className="searchTerm" 
+                                    placeholder="What are you looking for?"
+                                    value={searchKey}
+                                    onChange={(e) => setSearchKey(e.target.value)}
+                                    onKeyDown={(e) => searchForwarding(e, 1)}
+                                    />
+                                    <button onClick={(e) => searchForwarding(e, 2)} className="searchButton">
+                                        <SearchIcon />
+                                    </button>
+                                </div>
                         </Grid>
                     </Grid>
 

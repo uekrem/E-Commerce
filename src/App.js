@@ -16,6 +16,7 @@ import { AuthNotAccess } from './components/AuthNotAccess.js';
 import { AuthGhost } from './components/AuthGhost.js';
 import './css/footer.css';
 import "./css/emptyPage.css"
+import "./css/errorPage.css"
 import './css/navBar.css';
 import "./css/orderCard.css"
 import "./css/wideCard.css"
@@ -27,6 +28,7 @@ import "./css/basketCard.css"
 import "./css/basket.css"
 import "./css/loading.css"
 import "./css/profile.css"
+import "./css/searchBar.css"
 import "./css/productInfo.css"
 import 'swiper/css';
 import 'swiper/css/navigation';

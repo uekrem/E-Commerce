@@ -12,7 +12,6 @@ export function Profile() {
 
     const { user } = useSelector((state) => state.authR)
     const [name, setName] = useState("");
-    const [newEmail, setNewEmail] = useState("");
     const dispatch = useDispatch()
     const [showPassword, setShowPassword] = useState({0:false,1:false,2:false})
     const [replacePass , setReplacePass] = useState();
@@ -21,7 +20,6 @@ export function Profile() {
 
     useEffect(() => {
         setName(JSON.parse(jsCookie.get("auth"))[0].displayName);
-        setNewEmail(JSON.parse(jsCookie.get("auth"))[0].email);
     }, []);
     
     function handleClickShowPassword(index){
@@ -50,11 +48,12 @@ export function Profile() {
         await update({
             displayName: name,
         })
-        // dispatch(userLogin([{
-        //     ...user, displayName: name, isAuthenticated:true,
-        // }]))
-        // jsCookie.remove("auth")
-        jsCookie.set("auth", JSON.stringify([{...user, displayName: name}]));
+
+        const currentUser = JSON.parse(jsCookie.get("auth"))[0];
+        if (currentUser && name !== currentUser.displayName) {
+            const updatedUser = { ...currentUser, displayName: name };
+            jsCookie.set("auth", JSON.stringify([updatedUser]));
+        }
     }
 
   return (
@@ -72,6 +71,7 @@ export function Profile() {
                         autoFocus
                         value={name}
                         onChange={(e) => setName(e.target.value)}
+                        helperText={name[0] === undefined ? "Cannot be left blank" : ""}
                         />
                     </Grid>
 
@@ -81,12 +81,12 @@ export function Profile() {
                         id="email"
                         name="email"
                         disabled
-                        value={newEmail}
+                        value={JSON.parse(jsCookie.get("auth"))[0].email}
                         />
                     </Grid>
 
                     <Grid container item xs={6} md={6}>
-                        <Button onClick={handleInform} id="leftButton" size="large" variant="filled">UPDATE</Button>
+                        <Button disabled={name[0] === undefined} onClick={handleInform} id="leftButton" size="large" variant="filled">UPDATE</Button>
                     </Grid>
 
                 </Grid>

@@ -27,3 +27,15 @@
     color:rgb(241, 122, 26);
     background-color: rgb(255, 251, 248);
 }
+
+.notResult{
+    border: 1px solid rgb(241, 122, 26);
+    color: rgb(241, 122, 26);
+    border-radius: 10px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 30px;
+    width: 500px;
+    height: 40px;
+}

@@ -8,7 +8,6 @@ import { userLogin } from "./stores/auth.js";
 import jsCookie from "js-cookie";
 
 const firebaseConfig = {
-
 };
 
 const app = initializeApp(firebaseConfig);
