@@ -9,6 +9,7 @@ Bu proje, önde gelen e-ticaret platformu Trendyol'un bir klonunu geliştirmek a
 - Ürünler kategorilere ayrılarak sonuçlar elde edilebilir.
 - Hızlı arama yapılabilirler.
 - Ödeme sayfasına yönlendirilebilir.
+- Oluşturulan siparişlerin teslim edilip edilmeme durumuna göre kullanıcıya belirtilen bir sayfa bulunmakta ve teslim edildiğinde kullanıcıların yorum yapabilme özelliği aktif hale gelir.
 
 ## Kullanılan Teknolojiler
 - Redux kütüphanesi, uygulama genelinde durum yönetimi için kullanılmıştır.
